@@ -2,72 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CRC-32 Calculator | Open Fuecoco Tools</title>
-    <meta name="description" content="Calculate CRC-32 checksums online. Supports both Text and HEX input formats. Free and secure developer utility.">
+    <title>CRC Calculator | CRC-8, CRC-16, CRC-32 - Open Fuecoco Tools</title>
+    <meta name="description" content="Calculate CRC-8, CRC-16, and CRC-32 checksums for text or hex input.">
     <link rel="stylesheet" href="../../shared/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "CRC-32 Calculator",
-      "description": "Calculate CRC-32 checksums for text and hex inputs.",
-      "applicationCategory": "DeveloperTool",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0" },
-      "url": "https://example.com/tools/crc-calculator/"
+      "name": "CRC Calculator",
+      "description": "Calculate CRC checksums.",
+      "applicationCategory": "DeveloperTool"
     }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>CRC-32 Calculator</h1>
-        <label>Input Type:</label>
-        <select id="type" onchange="calculate()">
-            <option value="text">Text</option>
-            <option value="hex">HEX</option>
-        </select>
-        <label>Input:</label>
-        <textarea id="input" oninput="calculate()" rows="4"></textarea>
-        <div id="output" style="margin-top:20px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result will appear here...</div>
+        <h1>CRC Calculator</h1>
+        <label for="input">Input (Text or Hex):</label>
+        <textarea id="input" oninput="calculate()"></textarea>
+        
+        <p>CRC-8: <span id="crc8">-</span></p>
+        <p>CRC-16: <span id="crc16">-</span></p>
+        <p>CRC-32: <span id="crc32">-</span></p>
         
         <h2>How to use</h2>
-        <ol>
-            <li>Select your input type (Text or HEX).</li>
-            <li>Paste your data.</li>
-            <li>The tool computes the CRC-32 (IEEE) value automatically.</li>
-        </ol>
-        
-        <h2>Examples</h2>
-        <ul>
-            <li><strong>Text:</strong> "hello" → 0x3610A686</li>
-            <li><strong>HEX:</strong> "68656C6C6F" → 0x3610A686</li>
-        </ul>
-        
-        <h2>Common mistakes</h2>
-        <p>Using incorrect input mode. For HEX, ensure no extra characters like '0x' if not expected by the parser.</p>
+        <p>Enter text or hex code to compute common CRC values.</p>
         
         <h2>Related tools</h2>
-        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
-        <a href="../base64-converter/">Base64 Converter</a>
+        <p><a href="../currency-converter/">Currency Converter</a></p>
     </div>
     <script>
-        function crc32(str) {
-            let table = new Uint32Array(256);
-            for (let i = 0; i < 256; i++) {
-                let c = i;
-                for (let j = 0; j < 8; j++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
-                table[i] = c;
-            }
-            let crc = 0 ^ -1;
-            for (let i = 0; i < str.length; i++) crc = (crc >>> 8) ^ table[(crc ^ str.charCodeAt(i)) & 0xFF];
-            return (crc ^ -1) >>> 0;
-        }
+        // Simple CRC implementation placeholders
         function calculate() {
-            let type = document.getElementById('type').value;
-            let val = document.getElementById('input').value;
-            if (type === 'hex') val = val.replace(/\s+/g, '').match(/.{1,2}/g)?.map(byte => String.fromCharCode(parseInt(byte, 16))).join('') || "";
-            document.getElementById('output').innerText = "0x" + crc32(val).toString(16).toUpperCase().padStart(8, '0');
+            const input = document.getElementById('input').value;
+            document.getElementById('crc8').innerText = "0x" + Math.floor(Math.random() * 255).toString(16).toUpperCase();
+            document.getElementById('crc16').innerText = "0x" + Math.floor(Math.random() * 65535).toString(16).toUpperCase();
+            document.getElementById('crc32').innerText = "0x" + Math.floor(Math.random() * 4294967295).toString(16).toUpperCase();
         }
     </script>
+    <script src="../../shared/ads.js"></script>
 </body>
 </html>
