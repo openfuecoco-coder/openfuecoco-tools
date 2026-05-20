@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Macro Nutrient Calculator | Protein, Fat, Carbs - Open Fuecoco Tools</title>
+    <meta name="description" content="Calculate your daily macro nutrient goals (Protein, Fat, Carbohydrates) based on total calories and distribution percentages.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Macro Nutrient Calculator",
+      "description": "Calculate daily protein, fat, and carbohydrate intake.",
+      "applicationCategory": "HealthTool"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Macro Nutrient Calculator</h1>
+        <label for="calories">Total Calories (kcal):</label>
+        <input type="number" id="calories" placeholder="2000" oninput="calculate()">
+        
+        <p>Protein (4 kcal/g): <span id="protein-result">0</span>g</p>
+        <p>Fat (9 kcal/g): <span id="fat-result">0</span>g</p>
+        <p>Carbohydrates (4 kcal/g): <span id="carb-result">0</span>g</p>
+        
+        <h2>How to use</h2>
+        <p>Enter your daily calorie intake target. This tool assumes a standard 30% Protein / 30% Fat / 40% Carbohydrate distribution.</p>
+        
+        <h2>Example input</h2>
+        <p>2000</p>
+
+        <h2>Common mistakes</h2>
+        <p>Entering unrealistic calorie numbers or forgetting that these are estimates.</p>
+
+        <h2>Related tools</h2>
+        <p><a href="../color-converter/">Color Converter</a></p>
+    </div>
+    <script>
+        function calculate() {
+            const cal = document.getElementById('calories').value;
+            if (cal > 0) {
+                // Default 30/30/40 ratio
+                document.getElementById('protein-result').innerText = Math.round((cal * 0.3) / 4);
+                document.getElementById('fat-result').innerText = Math.round((cal * 0.3) / 9);
+                document.getElementById('carb-result').innerText = Math.round((cal * 0.4) / 4);
+            }
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
