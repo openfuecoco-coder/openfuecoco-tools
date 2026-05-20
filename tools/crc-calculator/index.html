@@ -28,13 +28,13 @@
         </select>
         <label>Input:</label>
         <textarea id="input" oninput="calculate()" rows="4"></textarea>
-        <div id="output" style="margin-top:20px; padding:10px; background:#fff; border-radius:4px;">Result will appear here...</div>
+        <div id="output" style="margin-top:20px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result will appear here...</div>
         
         <h2>How to use</h2>
         <ol>
-            <li>Select input type (Text or HEX).</li>
-            <li>Paste your data into the input box.</li>
-            <li>The CRC-32 result will update automatically.</li>
+            <li>Select your input type (Text or HEX).</li>
+            <li>Paste your data.</li>
+            <li>The tool computes the CRC-32 (IEEE) value automatically.</li>
         </ol>
         
         <h2>Examples</h2>
@@ -44,7 +44,7 @@
         </ul>
         
         <h2>Common mistakes</h2>
-        <p>Using HEX mode with invalid characters (non-hex digits). Ensure spaces are handled correctly.</p>
+        <p>Using incorrect input mode. For HEX, ensure no extra characters like '0x' if not expected by the parser.</p>
         
         <h2>Related tools</h2>
         <a href="../hex-dec-converter/">Hex/Dec Converter</a>
