@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resistor Color Code Calculator | Open Fuecoco Tools</title>
+    <meta name="description" content="Calculate resistor values and tolerance using color codes for 4-band resistors. Essential tool for electronics.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resistor Color Code Calculator",
+      "description": "Calculate resistor values from color bands.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/resistor-color-calc/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Resistor Color Code Calculator</h1>
+        
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:10px; margin-bottom: 20px;">
+            <div>
+                <label for="band1">Band 1</label>
+                <select id="band1" onchange="calculate()">
+                    <option value="1">Brown</option>
+                    <option value="2">Red</option>
+                    <option value="3">Orange</option>
+                    <option value="4">Yellow</option>
+                    <option value="5">Green</option>
+                    <option value="6">Blue</option>
+                    <option value="7">Violet</option>
+                    <option value="8">Grey</option>
+                    <option value="9">White</option>
+                </select>
+            </div>
+            <div>
+                <label for="band2">Band 2</label>
+                <select id="band2" onchange="calculate()">
+                    <option value="0">Black</option>
+                    <option value="1">Brown</option>
+                    <option value="2">Red</option>
+                    <option value="3">Orange</option>
+                    <option value="4">Yellow</option>
+                    <option value="5">Green</option>
+                    <option value="6">Blue</option>
+                    <option value="7">Violet</option>
+                    <option value="8">Grey</option>
+                    <option value="9">White</option>
+                </select>
+            </div>
+            <div>
+                <label for="multiplier">Multiplier</label>
+                <select id="multiplier" onchange="calculate()">
+                    <option value="1">Black (x1)</option>
+                    <option value="10">Brown (x10)</option>
+                    <option value="100">Red (x100)</option>
+                    <option value="1000">Orange (x1k)</option>
+                    <option value="10000">Yellow (x10k)</option>
+                    <option value="100000">Green (x100k)</option>
+                    <option value="1000000">Blue (x1M)</option>
+                    <option value="10000000">Violet (x10M)</option>
+                    <option value="0.1">Gold (x0.1)</option>
+                    <option value="0.01">Silver (x0.01)</option>
+                </select>
+            </div>
+            <div>
+                <label for="tolerance">Tolerance</label>
+                <select id="tolerance" onchange="calculate()">
+                    <option value="5%">Gold (5%)</option>
+                    <option value="10%">Silver (10%)</option>
+                    <option value="1%">Brown (1%)</option>
+                    <option value="2%">Red (2%)</option>
+                    <option value="0.5%">Green (0.5%)</option>
+                    <option value="0.25%">Blue (0.25%)</option>
+                    <option value="0.1%">Violet (0.1%)</option>
+                    <option value="0.05%">Grey (0.05%)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="output" style="margin-top:20px; padding:15px; background:#fff; border:1px solid #C4B5A5; border-radius:4px;">
+            Result: <strong>0 Ω</strong> ± <strong>0%</strong>
+        </div>
+
+        <h2>How to use</h2>
+        <ol>
+            <li>Select the color for each of the four bands on your resistor using the dropdowns.</li>
+            <li>The calculated resistance value (in Ohms) and its tolerance percentage will be displayed automatically.</li>
+        </ol>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Input:</strong> Brown (Band 1), Black (Band 2), Red (Multiplier), Gold (Tolerance) → <strong>Output:</strong> 1kΩ ± 5%</li>
+            <li><strong>Input:</strong> Red (Band 1), Violet (Band 2), Orange (Multiplier), Silver (Tolerance) → <strong>Output:</strong> 27kΩ ± 10%</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Ensure you read the color bands in the correct order. The first band is usually closest to an end, and the tolerance band is often slightly separated or thicker.</p>
+
+        <h2>Related tools</h2>
+        <a href="../crc-calculator/">CRC-32 Calculator</a>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
+    </div>
+
+    <script>
+        function calculate() {
+            const band1 = document.getElementById('band1').value;
+            const band2 = document.getElementById('band2').value;
+            const multiplier = document.getElementById('multiplier').value;
+            const tolerance = document.getElementById('tolerance').value;
+
+            const resistance = (parseInt(band1) * 10 + parseInt(band2)) * parseFloat(multiplier);
+            
+            let resistanceString;
+            if (resistance >= 1000000000) resistanceString = (resistance / 1000000000) + ' GΩ';
+            else if (resistance >= 1000000) resistanceString = (resistance / 1000000) + ' MΩ';
+            else if (resistance >= 1000) resistanceString = (resistance / 1000) + ' kΩ';
+            else resistanceString = resistance + ' Ω';
+
+            document.getElementById('output').innerHTML = `Result: <strong>${resistanceString}</strong> ± <strong>${tolerance}</strong>`;
+        }
+
+        // Initial calculation on page load
+        document.addEventListener('DOMContentLoaded', calculate);
+    </script>
+</body>
+</html>

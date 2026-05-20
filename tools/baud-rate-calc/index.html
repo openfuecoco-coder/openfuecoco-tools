@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baud Rate Calculator | Open Fuecoco Tools</title>
+    <meta name="description" content="Calculate UART baud rate register values based on system clock frequency. Essential for embedded systems development.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Baud Rate Calculator",
+      "description": "Calculate baud rate registers for UART.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/baud-rate-calc/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Baud Rate Calculator</h1>
+        <label for="clock">Clock Frequency (Hz):</label>
+        <input type="number" id="clock" value="16000000" oninput="calculate()">
+        
+        <label for="baud">Target Baud Rate:</label>
+        <input type="number" id="baud" value="9600" oninput="calculate()">
+        
+        <div id="output" style="margin-top:20px; padding:15px; background:#fff; border:1px solid #C4B5A5; border-radius:4px;">
+            Result will appear here...
+        </div>
+        
+        <h2>How to use</h2>
+        <ol>
+            <li>Enter your system clock speed (e.g., 16000000 for 16MHz).</li>
+            <li>Enter your desired baud rate.</li>
+            <li>The calculator provides the register value and error percentage.</li>
+        </ol>
+        
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Clock:</strong> 16000000, <strong>Baud:</strong> 9600 → <strong>UBRR:</strong> 103, <strong>Error:</strong> 0.16%</li>
+        </ul>
+        
+        <h2>Common mistakes</h2>
+        <p>Using the wrong baud rate formula for your specific MCU. This uses the standard AVR UART formula (f / (16 * baud) - 1).</p>
+        
+        <h2>Related tools</h2>
+        <a href="../crc-calculator/">CRC-32 Calculator</a>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
+    </div>
+    <script>
+        function calculate() {
+            const f = parseFloat(document.getElementById('clock').value);
+            const b = parseFloat(document.getElementById('baud').value);
+            if (f > 0 && b > 0) {
+                const ubrr = Math.round(f / (16 * b) - 1);
+                const actualBaud = Math.round(f / (16 * (ubrr + 1)));
+                const error = ((actualBaud - b) / b * 100).toFixed(2);
+                document.getElementById('output').innerHTML = `
+                    <strong>UBRR value:</strong> ${ubrr}<br>
+                    <strong>Actual Baud Rate:</strong> ${actualBaud}<br>
+                    <strong>Error:</strong> ${error}%
+                `;
+            } else {
+                document.getElementById('output').innerText = "Please enter valid numbers.";
+            }
+        }
+        calculate();
+    </script>
+</body>
+</html>
