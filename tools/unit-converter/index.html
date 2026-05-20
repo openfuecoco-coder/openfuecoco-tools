@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Converter | Open Fuecoco Tools</title>
+    <meta name="description" content="Quickly convert between common units of length (meters, feet) and weight (kg, lbs).">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Unit Converter",
+      "description": "Convert length and weight units.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/unit-converter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Unit Converter</h1>
+        <label>Type:</label>
+        <select id="type" onchange="convert()">
+            <option value="m_ft">Meters to Feet</option>
+            <option value="ft_m">Feet to Meters</option>
+            <option value="kg_lb">KG to LBS</option>
+            <option value="lb_kg">LBS to KG</option>
+        </select>
+        <input type="number" id="input" value="1" oninput="convert()" placeholder="Enter value...">
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
+        
+        <h2>How to use</h2>
+        <ol>
+            <li>Select the conversion type.</li>
+            <li>Enter the value.</li>
+        </ol>
+
+        <h2>Examples</h2>
+        <ul>
+            <li>1 Meter → 3.28084 Feet</li>
+            <li>1 KG → 2.20462 LBS</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Ensure you select the correct conversion direction.</p>
+
+        <h2>Related tools</h2>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
+    </div>
+    <script>
+        function convert(){
+            let type = document.getElementById('type').value;
+            let val = parseFloat(document.getElementById('input').value);
+            let res = 0;
+            if(type === 'm_ft') res = val * 3.28084;
+            else if(type === 'ft_m') res = val / 3.28084;
+            else if(type === 'kg_lb') res = val * 2.20462;
+            else if(type === 'lb_kg') res = val / 2.20462;
+            document.getElementById('output').innerText = res.toFixed(4);
+        }
+        convert();
+    </script>
+</body>
+</html>
