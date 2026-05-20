@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRC-32 Calculator</title>
+    <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CRC-32 Calculator</h1>
+        <label>Input Type:</label>
+        <select id="type" onchange="calculate()">
+            <option value="text">Text</option>
+            <option value="hex">HEX</option>
+        </select>
+        <label>Input:</label>
+        <textarea id="input" oninput="calculate()" rows="4"></textarea>
+        <div class="result" id="output" style="margin-top:20px; padding:10px; background:#fff; border-radius:4px;">Result will appear here...</div>
+    </div>
+    <script>
+        function crc32(str) {
+            let table = new Uint32Array(256);
+            for (let i = 0; i < 256; i++) {
+                let c = i;
+                for (let j = 0; j < 8; j++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+                table[i] = c;
+            }
+            let crc = 0 ^ -1;
+            for (let i = 0; i < str.length; i++) crc = (crc >>> 8) ^ table[(crc ^ str.charCodeAt(i)) & 0xFF];
+            return (crc ^ -1) >>> 0;
+        }
+        function calculate() {
+            let type = document.getElementById('type').value;
+            let val = document.getElementById('input').value;
+            if (type === 'hex') val = val.replace(/\s+/g, '').match(/.{1,2}/g)?.map(byte => String.fromCharCode(parseInt(byte, 16))).join('') || "";
+            document.getElementById('output').innerText = "0x" + crc32(val).toString(16).toUpperCase().padStart(8, '0');
+        }
+    </script>
+</body>
+</html>
