@@ -1,7 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>URL Encoder</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>URL Encoder</h1><input type="text" id="input" oninput="convert()"><div id="output" style="margin-top:10px;"></div></div>
-<script>
-    function convert(){ document.getElementById('output').innerText = encodeURIComponent(document.getElementById('input').value); }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>URL Encoder | Fueco Tools</title>
+    <meta name="description" content="Safely encode and decode strings for URLs.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "URL Encoder",
+      "description": "Encode and decode URLs.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/url-encoder/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Encoder</h1>
+        <input type="text" id="input" oninput="convert()" placeholder="Paste text here...">
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
+        
+        <h2>How to use</h2>
+        <p>Type characters to see them encoded for a URL.</p>
+
+        <h2>Related tools</h2>
+        <a href="../base64-converter/">Base64 Converter</a>
+    </div>
+    <script>
+        function convert(){ document.getElementById('output').innerText = encodeURIComponent(document.getElementById('input').value); }
+    </script>
+</body>
+</html>

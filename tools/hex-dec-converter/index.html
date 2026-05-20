@@ -1,7 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Hex/Dec Converter</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>Hex/Dec</h1><input type="text" id="input" oninput="convert()"><div id="output" style="margin-top:10px; padding:10px; background:#fff;"></div></div>
-<script>
-    function convert(){ let v = document.getElementById('input').value; document.getElementById('output').innerText = 'Dec: ' + parseInt(v, 16) + ' | Hex: ' + parseInt(v, 10).toString(16); }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hex/Dec Converter | Fueco Tools</title>
+    <meta name="description" content="Quickly convert numbers between decimal and hexadecimal bases.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Hex/Dec Converter",
+      "description": "Convert bases between Hex and Dec.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/hex-dec-converter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hex/Dec Converter</h1>
+        <input type="text" id="input" oninput="convert()" placeholder="Enter value (e.g. 255 or 0xFF)">
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
+        
+        <h2>How to use</h2>
+        <p>Enter a number in decimal or hexadecimal (prefix with 0x).</p>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Input:</strong> 255 → <strong>Output:</strong> Hex: ff</li>
+            <li><strong>Input:</strong> 0xA → <strong>Output:</strong> Dec: 10</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Missing '0x' prefix for hex input might cause the tool to interpret as decimal.</p>
+
+        <h2>Related tools</h2>
+        <a href="../crc-calculator/">CRC-32 Calculator</a>
+    </div>
+    <script>
+        function convert(){ 
+            let v = document.getElementById('input').value; 
+            let res = parseInt(v, v.startsWith('0x') ? 16 : 10);
+            document.getElementById('output').innerText = isNaN(res) ? 'Invalid input' : 'Dec: ' + res + ' | Hex: ' + res.toString(16); 
+        }
+    </script>
+</body>
+</html>

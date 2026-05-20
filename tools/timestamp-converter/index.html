@@ -1,7 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Timestamp Converter</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>Timestamp</h1><input type="number" id="input" oninput="convert()"><div id="output" style="margin-top:10px;"></div></div>
-<script>
-    function convert(){ document.getElementById('output').innerText = new Date(parseInt(document.getElementById('input').value)*1000).toLocaleString(); }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timestamp Converter | Fueco Tools</title>
+    <meta name="description" content="Convert Unix timestamps to human-readable dates.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Timestamp Converter",
+      "description": "Convert Unix epoch to date.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/timestamp-converter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Timestamp Converter</h1>
+        <input type="number" id="input" oninput="convert()" placeholder="Enter Unix Timestamp">
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
+        
+        <h2>How to use</h2>
+        <p>Input a Unix timestamp (seconds since epoch) to see the date.</p>
+
+        <h2>Common mistakes</h2>
+        <p>Some systems use milliseconds. This tool expects seconds.</p>
+
+        <h2>Related tools</h2>
+        <a href="../json-formatter/">JSON Formatter</a>
+    </div>
+    <script>
+        function convert(){ 
+            let t = parseInt(document.getElementById('input').value);
+            document.getElementById('output').innerText = isNaN(t) ? 'Invalid input' : new Date(t * 1000).toLocaleString(); 
+        }
+    </script>
+</body>
+</html>

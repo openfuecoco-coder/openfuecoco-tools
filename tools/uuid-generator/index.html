@@ -1,7 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>UUID Generator</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>UUID Gen</h1><button onclick="gen()">Generate</button><div id="output" style="margin-top:10px;"></div></div>
-<script>
-    function gen(){ document.getElementById('output').innerText = crypto.randomUUID(); }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>UUID Generator | Fueco Tools</title>
+    <meta name="description" content="Generate RFC 4122 compliant UUIDs instantly.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "UUID Generator",
+      "description": "Generate unique UUIDs.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/uuid-generator/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>UUID Generator</h1>
+        <button onclick="gen()">Generate UUID</button>
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;"></div>
+        
+        <h2>How to use</h2>
+        <p>Click the button to generate a new Version 4 UUID.</p>
+
+        <h2>Related tools</h2>
+        <a href="../json-formatter/">JSON Formatter</a>
+    </div>
+    <script>
+        function gen(){ document.getElementById('output').innerText = crypto.randomUUID(); }
+    </script>
+</body>
+</html>

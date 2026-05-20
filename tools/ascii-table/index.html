@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ASCII Table</title>
+    <title>ASCII Table Reference | Fueco Tools</title>
+    <meta name="description" content="Complete ASCII table reference chart including decimal, hexadecimal, and character representations.">
     <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ASCII Table Reference",
+      "description": "Reference chart for ASCII characters.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/ascii-table/"
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -12,6 +25,10 @@
             <thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Name</th></tr></thead>
             <tbody id="tableBody"></tbody>
         </table>
+        <h2>How to use</h2>
+        <p>Browse the table for character codes. Useful for debugging communication protocols.</p>
+        <h2>Related tools</h2>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
     </div>
     <script>
         const tbody = document.getElementById('tableBody');

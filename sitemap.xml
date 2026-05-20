@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/</loc></url>
-  <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/crc-calculator/</loc></url>
+  <url><loc>https://example.com/</loc></url>
+  <url><loc>https://example.com/tools/ascii-table/</loc></url>
+  <url><loc>https://example.com/tools/base64-converter/</loc></url>
+  <url><loc>https://example.com/tools/crc-calculator/</loc></url>
+  <url><loc>https://example.com/tools/hex-dec-converter/</loc></url>
+  <url><loc>https://example.com/tools/json-formatter/</loc></url>
+  <url><loc>https://example.com/tools/timestamp-converter/</loc></url>
+  <url><loc>https://example.com/tools/url-encoder/</loc></url>
+  <url><loc>https://example.com/tools/uuid-generator/</loc></url>
 </urlset>

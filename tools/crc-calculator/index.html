@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CRC-32 Calculator</title>
+    <title>CRC-32 Calculator | Fueco Tools</title>
+    <meta name="description" content="Calculate CRC-32 checksums online. Supports both Text and HEX input formats. Free and secure developer utility.">
     <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CRC-32 Calculator",
+      "description": "Calculate CRC-32 checksums for text and hex inputs.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/crc-calculator/"
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -15,7 +28,27 @@
         </select>
         <label>Input:</label>
         <textarea id="input" oninput="calculate()" rows="4"></textarea>
-        <div class="result" id="output" style="margin-top:20px; padding:10px; background:#fff; border-radius:4px;">Result will appear here...</div>
+        <div id="output" style="margin-top:20px; padding:10px; background:#fff; border-radius:4px;">Result will appear here...</div>
+        
+        <h2>How to use</h2>
+        <ol>
+            <li>Select input type (Text or HEX).</li>
+            <li>Paste your data into the input box.</li>
+            <li>The CRC-32 result will update automatically.</li>
+        </ol>
+        
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Text:</strong> "hello" → 0x3610A686</li>
+            <li><strong>HEX:</strong> "68656C6C6F" → 0x3610A686</li>
+        </ul>
+        
+        <h2>Common mistakes</h2>
+        <p>Using HEX mode with invalid characters (non-hex digits). Ensure spaces are handled correctly.</p>
+        
+        <h2>Related tools</h2>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
+        <a href="../base64-converter/">Base64 Converter</a>
     </div>
     <script>
         function crc32(str) {

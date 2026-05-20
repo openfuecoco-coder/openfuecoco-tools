@@ -1,7 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>JSON Formatter</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>JSON Formatter</h1><textarea id="input" rows="6"></textarea><button onclick="format()">Format</button><pre id="output" style="background:#fff; padding:10px;"></pre></div>
-<script>
-    function format(){ document.getElementById('output').innerText = JSON.stringify(JSON.parse(document.getElementById('input').value), null, 2); }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Formatter | Fueco Tools</title>
+    <meta name="description" content="Beautify, format, and validate your minified JSON strings online.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON Formatter",
+      "description": "Beautify and validate JSON.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/json-formatter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON Formatter</h1>
+        <textarea id="input" rows="6" placeholder="Paste minified JSON here..."></textarea>
+        <button onclick="format()">Beautify JSON</button>
+        <pre id="output" style="background:#fff; padding:10px; border:1px solid #C4B5A5; overflow-x:auto;"></pre>
+        
+        <h2>How to use</h2>
+        <ol>
+            <li>Paste your raw, unformatted JSON.</li>
+            <li>Click "Beautify JSON".</li>
+        </ol>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Input:</strong> {"key":"value"} → <strong>Output:</strong> Pretty-printed version</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Ensure your input is valid JSON (e.g., quotes around keys). Trailing commas often cause parsing errors.</p>
+        
+        <h2>Related tools</h2>
+        <a href="../base64-converter/">Base64 Converter</a>
+    </div>
+    <script>
+        function format(){ try { document.getElementById('output').innerText = JSON.stringify(JSON.parse(document.getElementById('input').value), null, 2); } catch(e){ document.getElementById('output').innerText = "Error: Invalid JSON format."; } }
+    </script>
+</body>
+</html>

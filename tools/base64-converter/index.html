@@ -1,8 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Base64 Converter</title><link rel="stylesheet" href="../../shared/style.css"></head>
-<body><div class="container"><h1>Base64 Converter</h1><textarea id="input" rows="4"></textarea><button onclick="encode()">Encode</button><button onclick="decode()">Decode</button><div id="output" style="margin-top:10px; padding:10px; background:#fff;"></div></div>
-<script>
-    function encode(){ document.getElementById('output').innerText = btoa(document.getElementById('input').value); }
-    function decode(){ try { document.getElementById('output').innerText = atob(document.getElementById('input').value); } catch(e) { document.getElementById('output').innerText = 'Error'; } }
-</script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Base64 Converter | Fueco Tools</title>
+    <meta name="description" content="Quickly encode text to Base64 and decode Base64 back to text with this secure, local-only developer tool.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Base64 Converter",
+      "description": "Base64 encoder and decoder for developers.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/base64-converter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Base64 Converter</h1>
+        <textarea id="input" rows="4"></textarea>
+        <button onclick="encode()">Encode to Base64</button>
+        <button onclick="decode()">Decode from Base64</button>
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;"></div>
+        
+        <h2>How to use</h2>
+        <ol>
+            <li>Paste your text or Base64 string in the input area.</li>
+            <li>Click "Encode to Base64" or "Decode from Base64".</li>
+            <li>Result appears instantly below.</li>
+        </ol>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Input:</strong> hello → <strong>Output:</strong> aGVsbG8=</li>
+            <li><strong>Input:</strong> aGVsbG8= → <strong>Output:</strong> hello</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Decoding invalid Base64 strings will throw an error. Ensure your string uses valid characters only.</p>
+
+        <h2>Related tools</h2>
+        <a href="../url-encoder/">URL Encoder</a>
+        <a href="../json-formatter/">JSON Formatter</a>
+    </div>
+    <script>
+        function encode(){ document.getElementById('output').innerText = btoa(document.getElementById('input').value); }
+        function decode(){ try { document.getElementById('output').innerText = atob(document.getElementById('input').value); } catch(e) { document.getElementById('output').innerText = 'Invalid Base64 format.'; } }
+    </script>
+</body>
+</html>
