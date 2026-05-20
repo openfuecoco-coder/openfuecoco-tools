@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII Table</title>
+    <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ASCII Table</h1>
+        <table style="width:100%; border-collapse:collapse; background:#fff;">
+            <thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Name</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+    <script>
+        const tbody = document.getElementById('tableBody');
+        for (let i = 0; i < 128; i++) {
+            const row = document.createElement('tr');
+            let char = String.fromCharCode(i);
+            let name = i < 32 ? "Control" : (i === 32 ? "Space" : (i === 127 ? "DEL" : char));
+            row.innerHTML = '<td style="border:1px solid #C4B5A5; padding:8px; text-align:center;">'+i+'</td><td style="border:1px solid #C4B5A5; padding:8px; text-align:center;">0x'+i.toString(16).toUpperCase().padStart(2, '0')+'</td><td style="border:1px solid #C4B5A5; padding:8px; text-align:center;">'+(i < 33 || i === 127 ? '' : char)+'</td><td style="border:1px solid #C4B5A5; padding:8px; text-align:center;">'+name+'</td>';
+            tbody.appendChild(row);
+        }
+    </script>
+</body>
+</html>
