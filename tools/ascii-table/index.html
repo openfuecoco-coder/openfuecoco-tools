@@ -20,15 +20,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>ASCII Table</h1>
+        <h1>ASCII Table Reference</h1>
         <table style="width:100%; border-collapse:collapse; background:#fff;">
             <thead><tr><th>Dec</th><th>Hex</th><th>Char</th><th>Name</th></tr></thead>
             <tbody id="tableBody"></tbody>
         </table>
+        
         <h2>How to use</h2>
-        <p>This table lists decimal, hexadecimal, and character mappings for the standard ASCII character set (0-127).</p>
+        <p>This table provides the decimal, hexadecimal, and character mappings for standard ASCII (0-127). It is essential for troubleshooting character encoding and serial communication protocols.</p>
+        
+        <h2>Example</h2>
+        <ul>
+            <li><strong>Dec:</strong> 65 → <strong>Hex:</strong> 0x41 → <strong>Char:</strong> 'A'</li>
+        </ul>
+
         <h2>Common mistakes</h2>
-        <p>Confusing ASCII 0-31 control characters with visible characters.</p>
+        <p>Do not confuse non-printable control characters (0-31) with visible characters. They are represented as 'Control' in this table.</p>
+        
         <h2>Related tools</h2>
         <a href="../hex-dec-converter/">Hex/Dec Converter</a>
     </div>

@@ -21,16 +21,15 @@
 <body>
     <div class="container">
         <h1>Base64 Converter</h1>
-        <textarea id="input" rows="4"></textarea>
+        <textarea id="input" rows="4" placeholder="Enter text or Base64..."></textarea>
         <button onclick="encode()">Encode to Base64</button>
         <button onclick="decode()">Decode from Base64</button>
-        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;"></div>
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result will appear here...</div>
         
         <h2>How to use</h2>
         <ol>
-            <li>Paste your text or Base64 string in the input area.</li>
-            <li>Click "Encode to Base64" or "Decode from Base64".</li>
-            <li>Result appears instantly below.</li>
+            <li>Type or paste your text or Base64 string into the input box.</li>
+            <li>Select "Encode" or "Decode" to transform your data instantly.</li>
         </ol>
 
         <h2>Examples</h2>
@@ -40,7 +39,7 @@
         </ul>
 
         <h2>Common mistakes</h2>
-        <p>Decoding invalid Base64 strings will throw an error. Ensure your string uses valid characters only.</p>
+        <p>Attempting to decode a string that is not valid Base64 will trigger an error. Ensure input is formatted correctly.</p>
 
         <h2>Related tools</h2>
         <a href="../url-encoder/">URL Encoder</a>
@@ -48,7 +47,7 @@
     </div>
     <script>
         function encode(){ document.getElementById('output').innerText = btoa(document.getElementById('input').value); }
-        function decode(){ try { document.getElementById('output').innerText = atob(document.getElementById('input').value); } catch(e) { document.getElementById('output').innerText = 'Invalid Base64 format.'; } }
+        function decode(){ try { document.getElementById('output').innerText = atob(document.getElementById('input').value); } catch(e) { document.getElementById('output').innerText = 'Error: Invalid Base64 format.'; } }
     </script>
 </body>
 </html>
