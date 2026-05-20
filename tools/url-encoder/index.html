@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>URL Encoder | Fueco Tools</title>
-    <meta name="description" content="Safely encode and decode strings for URLs.">
+    <title>URL Encoder/Decoder | Fueco Tools</title>
+    <meta name="description" content="Safely encode and decode strings for URL query parameters using this free online tool.">
     <link rel="stylesheet" href="../../shared/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "URL Encoder",
+      "name": "URL Encoder/Decoder",
       "description": "Encode and decode URLs.",
       "applicationCategory": "DeveloperTool",
       "operatingSystem": "All",
@@ -20,12 +20,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>URL Encoder</h1>
+        <h1>URL Encoder/Decoder</h1>
         <input type="text" id="input" oninput="convert()" placeholder="Paste text here...">
         <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
         
         <h2>How to use</h2>
-        <p>Type characters to see them encoded for a URL.</p>
+        <ol>
+            <li>Type or paste your text in the input box.</li>
+            <li>The tool automatically generates the URL-encoded string.</li>
+        </ol>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><strong>Input:</strong> hello world → <strong>Output:</strong> hello%20world</li>
+        </ul>
+
+        <h2>Common mistakes</h2>
+        <p>Forgetting that non-alphanumeric characters need encoding in URLs.</p>
 
         <h2>Related tools</h2>
         <a href="../base64-converter/">Base64 Converter</a>
