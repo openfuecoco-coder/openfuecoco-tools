@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Hex/Dec Converter</title><link rel="stylesheet" href="../../shared/style.css"></head>
+<body><div class="container"><h1>Hex/Dec</h1><input type="text" id="input" oninput="convert()"><div id="output" style="margin-top:10px; padding:10px; background:#fff;"></div></div>
+<script>
+    function convert(){ let v = document.getElementById('input').value; document.getElementById('output').innerText = 'Dec: ' + parseInt(v, 16) + ' | Hex: ' + parseInt(v, 10).toString(16); }
+</script></body></html>

@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>JSON Formatter</title><link rel="stylesheet" href="../../shared/style.css"></head>
+<body><div class="container"><h1>JSON Formatter</h1><textarea id="input" rows="6"></textarea><button onclick="format()">Format</button><pre id="output" style="background:#fff; padding:10px;"></pre></div>
+<script>
+    function format(){ document.getElementById('output').innerText = JSON.stringify(JSON.parse(document.getElementById('input').value), null, 2); }
+</script></body></html>

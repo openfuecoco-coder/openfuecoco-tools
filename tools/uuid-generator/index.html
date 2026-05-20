@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>UUID Generator</title><link rel="stylesheet" href="../../shared/style.css"></head>
+<body><div class="container"><h1>UUID Gen</h1><button onclick="gen()">Generate</button><div id="output" style="margin-top:10px;"></div></div>
+<script>
+    function gen(){ document.getElementById('output').innerText = crypto.randomUUID(); }
+</script></body></html>
