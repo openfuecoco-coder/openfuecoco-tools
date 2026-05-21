@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Path Visualizer | Fueco Tools</title>
+    <meta name="description" content="A simple tool to visualize SVG paths in real-time.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SVG Path Visualizer",
+      "description": "A tool to visualize SVG paths in real-time."
+    }
+    </script>
+</head>
+<body>
+    <h1>SVG Path Visualizer</h1>
+    <textarea id="pathInput" placeholder="Enter SVG path data (e.g. M10 10 H 90 V 90 H 10 Z)"></textarea>
+    <svg id="visualizer" width="200" height="200" style="border:1px solid #ccc; background:#fff;">
+        <path id="svgPath" d="" fill="none" stroke="black" stroke-width="2"/>
+    </svg>
+    <script>
+        const input = document.getElementById('pathInput');
+        const path = document.getElementById('svgPath');
+        input.addEventListener('input', (e) => {
+            path.setAttribute('d', e.target.value);
+        });
+    </script>
+    <h2>How to use</h2>
+    <p>Paste the d attribute value of an SVG path into the text area.</p>
+    <h2>Example Input</h2>
+    <p>M10 10 H 90 V 90 H 10 Z</p>
+    <h2>Common mistakes</h2>
+    <p>Using invalid SVG path syntax.</p>
+    <h2>Related tools</h2>
+    <p><a href="../">All Tools</a></p>
+</body>
+</html>
