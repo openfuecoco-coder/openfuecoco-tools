@@ -7,45 +7,53 @@
     <style>
         .category { margin-bottom: 25px; }
         .category h2 { border-bottom: 2px solid #C4B5A5; padding-bottom: 5px; color: #4A4036; }
-        .tool-list { display: grid; gap: 10px; }
-        .tool-list a { display: block; padding: 10px; background: #fff; border: 1px solid #E8E4D9; text-decoration: none; color: #4A4036; }
-        .tool-list a:hover { background: #FDFBF7; }
+        .tool-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .tool-list a { display: block; padding: 10px; background: #fff; border: 1px solid #E8E4D9; text-decoration: none; color: #4A4036; border-radius: 4px; }
+        .tool-list a:hover { background: #FDFBF7; border-color: #C4B5A5; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Open Fuecoco Tools</h1>
-        <p>Collection of essential developer utilities.</p>
+        <p>Collection of essential developer and lifestyle utilities.</p>
 
         <div class="category">
             <h2>開發工具 (Developer Tools)</h2>
             <div class="tool-list">
+                <a href="tools/ascii-art-generator/">ASCII Art Generator</a>
                 <a href="tools/ascii-table/">ASCII Table</a>
                 <a href="tools/base64-converter/">Base64 Converter</a>
                 <a href="tools/baud-rate-calc/">Baud Rate Calculator</a>
                 <a href="tools/crc-calculator/">CRC Calculator</a>
+                <a href="tools/endianness-converter/">Endianness Converter</a>
                 <a href="tools/hex-dec-converter/">Hex/Dec Converter</a>
                 <a href="tools/json-formatter/">JSON Formatter</a>
+                <a href="tools/json-schema-validator/">JSON Schema Validator</a>
+                <a href="tools/markdown-table-generator/">Markdown Table Generator</a>
+                <a href="tools/regex-tester/">Regex Tester</a>
+                <a href="tools/sql-query-formatter/">SQL Query Formatter</a>
                 <a href="tools/timestamp-converter/">Timestamp Converter</a>
                 <a href="tools/url-encoder/">URL Encoder</a>
                 <a href="tools/uuid-generator/">UUID Generator</a>
-                <a href="tools/endianness-converter/">Endianness Converter</a>
-                <a href="tools/sql-query-formatter/">SQL Query Formatter</a>
             </div>
         </div>
 
         <div class="category">
             <h2>生活與財經 (Lifestyle & Finance)</h2>
             <div class="tool-list">
+                <a href="tools/color-converter/">Color Converter</a>
                 <a href="tools/currency-converter/">Currency Converter</a>
                 <a href="tools/macro-nutrient-calculator/">Macro Nutrient Calculator</a>
+                <a href="tools/resistor-color-calc/">Resistor Color Calculator</a>
                 <a href="tools/taiwan-stock-yield-calculator/">台灣股市殖利率計算機</a>
+                <a href="tools/unit-converter/">Unit Converter</a>
             </div>
         </div>
 
         <div class="category">
             <h2>網路與多媒體 (Web & Media)</h2>
             <div class="tool-list">
+                <a href="tools/image-format-optimizer/">Image Format Optimizer</a>
                 <a href="tools/qr-code-generator/">QR Code 生成器</a>
                 <a href="tools/url-shortener/">短網址生成器</a>
             </div>
