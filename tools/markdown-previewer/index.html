@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 預覽器 | Markdown Previewer</title>
+    <meta name="description" content="即時 Markdown 轉 HTML 預覽工具。支援 GitHub Flavored Markdown 語法，適合快速編輯與預覽文件。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Markdown 預覽器",
+      "description": "即時 Markdown 轉 HTML 預覽工具。",
+      "applicationCategory": "DeveloperApplication",
+      "browserRequirements": "Requires JavaScript."
+    }
+    </script>
+</head>
+<body>
+    <header><h1>Markdown 預覽器</h1></header>
+    <main>
+        <section>
+            <textarea id="input" style="width: 100%; height: 200px;" placeholder="在此輸入 Markdown 語法..."></textarea>
+            <div id="output" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px; min-height: 100px;"></div>
+        </section>
+        <section>
+            <h2>使用說明</h2>
+            <p>在上方輸入框輸入 Markdown 內容，下方將即時顯示轉譯後的 HTML 結果。</p>
+        </section>
+        <section>
+            <h2>範例</h2>
+            <pre># 標題
+- 列表項目 1
+- 列表項目 2</pre>
+        </section>
+    </main>
+    <script>
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+        // Simple Markdown parser implementation for the preview
+        input.addEventListener('input', () => {
+            let text = input.value;
+            // Basic regex replacements for preview
+            text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            text = text.replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>');
+            text = text.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>');
+            output.innerHTML = text;
+        });
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
