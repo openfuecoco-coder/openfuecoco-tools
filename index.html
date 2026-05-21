@@ -2,43 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Open Fuecoco Tools | Free Developer Utilities & Converters</title>
-    <meta name="description" content="Fueco Tools provides a suite of free, fast, and secure developer utilities including checksum calculators, formatters, and data converters.">
+    <title>Open Fuecoco Tools | Developer & Utility Tools</title>
     <link rel="stylesheet" href="shared/style.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Open Fuecoco Tools",
-      "url": "https://example.com/",
-      "description": "Free high-quality developer utility tools."
-    }
-    </script>
+    <style>
+        .category { margin-bottom: 25px; }
+        .category h2 { border-bottom: 2px solid #C4B5A5; padding-bottom: 5px; color: #4A4036; }
+        .tool-list { display: grid; gap: 10px; }
+        .tool-list a { display: block; padding: 10px; background: #fff; border: 1px solid #E8E4D9; text-decoration: none; color: #4A4036; }
+        .tool-list a:hover { background: #FDFBF7; }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Open Fuecoco Tools</h1>
-        <p>Your collection of essential, fast, and pure-JS developer utilities.</p>
-        <a href="tools/ascii-art-generator/">ASCII Art Banner Generator: Convert text into stylized ASCII banners.</a>
-        <a href="tools/ascii-table/">ASCII Table: A comprehensive reference chart for ASCII characters.</a>
-        <a href="tools/base64-converter/">Base64 Converter: Effortlessly encode and decode text to Base64.</a>
-        <a href="tools/baud-rate-calc/">Baud Rate Calculator: UART register calculations for microcontrollers.</a>
-        <a href="tools/crc-calculator/">CRC-32 Calculator: Generate CRC-32 checksums for text or hex inputs.</a>
-        <a href="tools/endianness-converter/">Endianness Converter: Convert between Big-Endian and Little-Endian.</a>
-        <a href="tools/qr-code-generator/">QR Code 生成器: 將文字或連結轉換為 QR Code。</a>
-        <a href="tools/url-shortener/">短網址生成器: 將長網址轉換為短網址（模擬器）。</a>
-        <a href="tools/taiwan-stock-yield-calculator/">台灣股市殖利率計算機: 計算台股殖利率與除權息參考價。</a>
-        <a href="tools/hex-dec-converter/">Hex/Dec Converter: Fast conversions between hexadecimal and decimal bases.</a>
-        <a href="tools/json-formatter/">JSON Formatter: Clean, beautify, and validate your JSON data.</a>
-        <a href="tools/json-schema-validator/">JSON/YAML Schema Validator: Validate your data against JSON schema definitions.</a>
-        <a href="tools/color-converter/">Color Converter: Convert Hex to RGB and HSL.</a>
-        <a href="tools/crc-calculator/">CRC Calculator: Calculate CRC-8, 16, 32 checksums.</a>
-        <a href="tools/currency-converter/">Currency Converter: Convert USD to 10 common global currencies.</a>
-        <a href="tools/macro-nutrient-calculator/">Macro Nutrient Calculator: Calculate daily protein, fat, and carbs.</a>
-        <a href="tools/timestamp-converter/">Timestamp Converter: Convert Unix epoch timestamps into readable dates.</a>
-        <a href="tools/unit-converter/">Unit Converter: Easy conversions for length and weight.</a>
-        <a href="tools/url-encoder/">URL Encoder: Safely encode and decode URL-encoded query strings.</a>
-        <a href="tools/uuid-generator/">UUID Generator: Instantly generate RFC 4122 standard-compliant UUIDs.</a>
+        <p>Collection of essential developer utilities.</p>
+
+        <div class="category">
+            <h2>開發工具 (Developer Tools)</h2>
+            <div class="tool-list">
+                <a href="tools/ascii-table/">ASCII Table</a>
+                <a href="tools/base64-converter/">Base64 Converter</a>
+                <a href="tools/baud-rate-calc/">Baud Rate Calculator</a>
+                <a href="tools/crc-calculator/">CRC Calculator</a>
+                <a href="tools/hex-dec-converter/">Hex/Dec Converter</a>
+                <a href="tools/json-formatter/">JSON Formatter</a>
+                <a href="tools/timestamp-converter/">Timestamp Converter</a>
+                <a href="tools/url-encoder/">URL Encoder</a>
+                <a href="tools/uuid-generator/">UUID Generator</a>
+                <a href="tools/endianness-converter/">Endianness Converter</a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>生活與財經 (Lifestyle & Finance)</h2>
+            <div class="tool-list">
+                <a href="tools/currency-converter/">Currency Converter</a>
+                <a href="tools/macro-nutrient-calculator/">Macro Nutrient Calculator</a>
+                <a href="tools/taiwan-stock-yield-calculator/">台灣股市殖利率計算機</a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>網路與多媒體 (Web & Media)</h2>
+            <div class="tool-list">
+                <a href="tools/qr-code-generator/">QR Code 生成器</a>
+                <a href="tools/url-shortener/">短網址生成器</a>
+            </div>
+        </div>
     </div>
     <script src="shared/ads.js"></script>
 </body>
