@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Endianness Converter | Open Fuecoco Tools</title>
+    <meta name="description" content="Convert between Big-Endian and Little-Endian byte orders for hexadecimal values.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Endianness Converter",
+      "description": "Convert between Big-Endian and Little-Endian byte orders.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://example.com/tools/endianness-converter/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Endianness Converter</h1>
+        <p>Enter a hexadecimal string to swap byte order.</p>
+        <input type="text" id="input" placeholder="e.g. 12345678" style="width:100%; padding:8px; margin-bottom:10px;">
+        <button onclick="convert()">Convert Endianness</button>
+        <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5; word-break:break-all;"></div>
+        
+        <h2>How to use</h2>
+        <p>Enter a hex string (even length), click the button, and it will swap pairs of bytes (e.g. 12 34 56 78 becomes 78 56 34 12).</p>
+
+        <h2>Common Mistakes</h2>
+        <ul>
+            <li>Forgetting to include all bytes (must be even length).</li>
+            <li>Misinterpreting bitwise endianness vs byte-level swapping.</li>
+        </ul>
+
+        <h2>Related tools</h2>
+        <a href="../hex-dec-converter/">Hex/Dec Converter</a>
+    </div>
+    <script>
+        function convert() {
+            let val = document.getElementById('input').value.replace(/\s+/g, '');
+            if (val.length % 2 !== 0) {
+                document.getElementById('output').innerText = "Error: Input must have an even number of characters.";
+                return;
+            }
+            let pairs = val.match(/.{1,2}/g);
+            let swapped = pairs.reverse().join('');
+            document.getElementById('output').innerText = swapped;
+        }
+    </script>
+</body>
+</html>
