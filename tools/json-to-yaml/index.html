@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to YAML Converter - Easy JSON to YAML Conversion</title>
+    <meta name="description" content="Free online JSON to YAML converter. Quickly transform your JSON data into clean, readable YAML format. No server-side processing, 100% client-side.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON to YAML Converter",
+      "url": "https://openfuecoco.github.io/openfuecoco-tools/tools/json-to-yaml/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "description": "A simple, client-side tool to convert JSON strings to YAML format."
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON to YAML Converter</h1>
+        <p>Convert your JSON (JavaScript Object Notation) data into YAML (YAML Ain't Markup Language) format instantly.</p>
+
+        <div class="tool-section">
+            <div class="input-group">
+                <label for="jsonInput">JSON Input:</label>
+                <textarea id="jsonInput" placeholder='{ "name": "Fueco", "version": 1, "tags": ["AI", "Tool"] }'></textarea>
+            </div>
+            <div class="action-group">
+                <button id="convertBtn">Convert to YAML &rarr;</button>
+                <button id="clearBtn">Clear</button>
+            </div>
+            <div class="input-group">
+                <label for="yamlOutput">YAML Output:</label>
+                <textarea id="yamlOutput" readonly placeholder="YAML output will appear here..."></textarea>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Paste your JSON code into the <strong>JSON Input</strong> box.</li>
+                <li>Click the <strong>Convert to YAML</strong> button.</li>
+                <li>Copy the resulting YAML text from the <strong>YAML Output</strong> box.</li>
+            </ol>
+
+            <h2>Example Input</h2>
+            <pre class="example-box">{
+  "project": "OpenClaw",
+  "version": "1.0.0",
+  "settings": {
+    "theme": "dark",
+    "notifications": true
+  },
+  "dependencies": ["node", "git", "bash"]
+}</pre>
+
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Invalid JSON:</strong> Ensure your JSON is valid (e.g., double quotes for keys, no trailing commas). Use a JSON validator if you're unsure.</li>
+                <li><strong>Circular References:</strong> This tool does not support JSON with circular references.</li>
+                <li><strong>Extremely Large Files:</strong> Since this runs in the browser, very large JSON files might cause the tab to freeze.</li>
+            </ul>
+
+            <h2>Related Tools</h2>
+            <ul>
+                <li><a href="../yaml-to-json/">YAML to JSON Converter</a></li>
+                <li><a href="../jwt-decoder/">JWT Decoder</a></li>
+                <li><a href="../url-parser/">URL Query Parameter Parser</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function jsonToYaml(obj, indent = 0) {
+            const spacing = '  '.repeat(indent);
+            if (obj === null) return 'null';
+            if (typeof obj === 'string') {
+                if (obj.includes('\n') || obj.includes(': ')) {
+                    return `|-\n${obj.split('\n').map(line => spacing + '  ' + line).join('\n')}`;
+                }
+                return `"${obj.replace(/"/g, '\\"')}"`;
+            }
+            if (typeof obj !== 'object') return String(obj);
+
+            if (Array.isArray(obj)) {
+                if (obj.length === 0) return '[]';
+                return obj.map(item => {
+                    const value = jsonToYaml(item, indent + 1);
+                    return `\n${spacing}- ${value.trimStart()}`;
+                }).join('').trimStart();
+            }
+
+            const keys = Object.keys(obj);
+            if (keys.length === 0) return '{}';
+            return keys.map(key => {
+                const value = jsonToYaml(obj[key], indent + 1);
+                const formattedValue = (typeof obj[key] === 'object' && obj[key] !== null) 
+                    ? `\n${value}` 
+                    : ` ${value}`;
+                return `\n${spacing}${key}:${formattedValue}`;
+            }).join('').trimStart();
+        }
+
+        document.getElementById('convertBtn').addEventListener('click', () => {
+            const input = document.getElementById('jsonInput').value.trim();
+            const output = document.getElementById('yamlOutput');
+            if (!input) {
+                output.value = 'Please enter some JSON.';
+                return;
+            }
+            try {
+                const jsonObj = JSON.parse(input);
+                const yamlResult = jsonToYaml(jsonObj);
+                output.value = yamlResult;
+            } catch (e) {
+                output.value = 'Error: Invalid JSON input.\n' + e.message;
+            }
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('yamlOutput').value = '';
+        });
+    </script>
+</body>
+</html>

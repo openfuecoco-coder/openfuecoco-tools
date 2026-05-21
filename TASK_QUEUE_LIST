@@ -1,4 +1,4 @@
-- [ ] Create a "JSON to YAML Converter" tool at tools/json-to-yaml/index.html
+- [x] Create a "JSON to YAML Converter" tool at tools/json-to-yaml/index.html
 - [ ] Create a "YAML to JSON Converter" tool at tools/yaml-to-json/index.html
 - [ ] Create a "JWT Decoder" tool at tools/jwt-decoder/index.html
 - [ ] Create a "URL Query Parameter Parser" tool at tools/url-parser/index.html
