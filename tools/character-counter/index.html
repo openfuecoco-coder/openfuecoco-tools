@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>字元計算器 - FuecoTools</title>
+    <meta name="description" content="快速計算文字的字元數與字數。">
+    <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+    <h1>字元計算器</h1>
+    <textarea id="input" placeholder="請在此輸入文字..."></textarea>
+    <div id="result">字元數: 0 | 字數: 0</div>
+    <script>
+        const input = document.getElementById('input');
+        const result = document.getElementById('result');
+        input.addEventListener('input', () => {
+            const val = input.value;
+            result.innerText = `字元數: ${val.length} | 字數: ${val.replace(/\s/g, '').length}`;
+        });
+    </script>
+    <h2>如何使用</h2>
+    <p>在輸入框中輸入文字，下方會即時顯示字元統計資訊。</p>
+</body>
+</html>
