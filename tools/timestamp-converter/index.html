@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Timestamp Converter | Open Fuecoco Tools</title>
-    <meta name="description" content="Convert Unix timestamps to human-readable dates.">
+    <meta name="description" content="Convert Unix timestamps (seconds or milliseconds) to human-readable dates.">
     <link rel="stylesheet" href="../../shared/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Timestamp Converter",
-      "description": "Convert Unix epoch to date.",
+      "description": "Convert Unix epoch (seconds/milliseconds) to date.",
       "applicationCategory": "DeveloperTool",
       "operatingSystem": "All",
       "offers": { "@type": "Offer", "price": "0" },
-      "url": "https://example.com/tools/timestamp-converter/"
+      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/timestamp-converter/"
     }
     </script>
 </head>
 <body>
     <div class="container">
         <h1>Timestamp Converter</h1>
-        <input type="number" id="input" oninput="convert()" placeholder="Enter Unix Timestamp">
+        <input type="number" id="input" oninput="convert()" placeholder="Enter Timestamp" style="width:100%; padding:8px;">
+        <select id="unit" onchange="convert()" style="margin-top:10px;">
+            <option value="s">Seconds (s)</option>
+            <option value="ms">Milliseconds (ms)</option>
+        </select>
         <div id="output" style="margin-top:10px; padding:10px; background:#fff; border:1px solid #C4B5A5;">Result...</div>
         
         <h2>How to use</h2>
-        <p>Input a Unix timestamp (seconds since epoch) to see the date.</p>
-
-        <h2>Common mistakes</h2>
-        <p>Some systems use milliseconds. This tool expects seconds.</p>
+        <p>Input a Unix timestamp and select whether it is in seconds or milliseconds.</p>
 
         <h2>Related tools</h2>
         <a href="../json-formatter/">JSON Formatter</a>
@@ -36,7 +37,9 @@
     <script>
         function convert(){ 
             let t = parseInt(document.getElementById('input').value);
-            document.getElementById('output').innerText = isNaN(t) ? 'Invalid input' : new Date(t * 1000).toLocaleString(); 
+            let unit = document.getElementById('unit').value;
+            let date = unit === 'ms' ? new Date(t) : new Date(t * 1000);
+            document.getElementById('output').innerText = isNaN(t) ? 'Invalid input' : date.toLocaleString(); 
         }
     </script>
 </body>
