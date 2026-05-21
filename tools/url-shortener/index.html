@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>短網址生成器 | Open Fuecoco Tools</title>
+    <meta name="description" content="快速將長網址轉換為短網址（模擬器）。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "短網址生成器",
+      "description": "將長網址轉為短網址。",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/url-shortener/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>短網址生成器</h1>
+        <p>請輸入您的長網址 (本工具為模擬器，僅供本地測試):</p>
+        <input type="text" id="longUrl" placeholder="https://example.com/very/long/url" style="width:100%; padding:8px; margin-bottom:10px;">
+        <button onclick="shorten()">生成短網址</button>
+        
+        <div id="output" style="margin-top:20px; padding:15px; background:#fff; border:1px solid #C4B5A5; display:none;">
+            <p>您的短網址為:</p>
+            <a id="shortUrl" href="#" target="_blank"></a>
+        </div>
+        
+        <h2>說明</h2>
+        <p>此短網址生成器為前端模擬工具，產生出的短網址不會真正導向原網址。</p>
+
+        <h2>Related tools</h2>
+        <a href="../url-encoder/">URL Encoder</a>
+    </div>
+    <script>
+        function shorten() {
+            const longUrl = document.getElementById('longUrl').value;
+            if (!longUrl) return alert("請輸入網址");
+            
+            // Generate a simple fake hash
+            const hash = Math.random().toString(36).substring(7);
+            const shortUrl = "https://f.ue/" + hash;
+            
+            document.getElementById('shortUrl').innerText = shortUrl;
+            document.getElementById('shortUrl').href = longUrl;
+            document.getElementById('output').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
