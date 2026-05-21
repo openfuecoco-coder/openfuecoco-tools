@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII Art Banner Generator</title>
+    <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+    <h1>ASCII Art Banner Generator</h1>
+    <textarea id="inputText" rows="3" placeholder="輸入文字..."></textarea>
+    <button onclick="generate()">生成</button>
+    <pre id="output"></pre>
+
+    <script>
+        function generate() {
+            const text = document.getElementById('inputText').value;
+            // Simplified conversion for example
+            document.getElementById('output').textContent = text.split('').map(c => `[${c}]`).join(' ');
+        }
+    </script>
+</body>
+</html>

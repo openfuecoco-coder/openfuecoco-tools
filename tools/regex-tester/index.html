@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Regex Tester & Explainer</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        textarea { width: 100%; height: 100px; }
+        #output { border: 1px solid #ccc; padding: 10px; margin-top: 10px; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Regex Tester & Explainer</h1>
+    <textarea id="regex" placeholder="輸入 Regex (例如: \d+)"></textarea>
+    <textarea id="test" placeholder="輸入測試文字"></textarea>
+    <button onclick="testRegex()">測試</button>
+    <div id="output"></div>
+    <script>
+        function testRegex() {
+            const re = document.getElementById('regex').value;
+            const text = document.getElementById('test').value;
+            try {
+                const regex = new RegExp(re, 'g');
+                const matches = text.match(regex);
+                document.getElementById('output').innerText = matches ? '找到匹配: ' + matches.join(', ') : '無匹配';
+            } catch (e) {
+                document.getElementById('output').innerText = '錯誤: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

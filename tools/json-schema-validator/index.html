@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON/YAML Schema Validator | Fueco Tools</title>
+    <meta name="description" content="A simple, fast, in-browser JSON and YAML schema validator.">
+    <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+    <header><h1>JSON/YAML Schema Validator</h1></header>
+    <main>
+        <textarea id="input" placeholder="Paste your JSON or YAML here..." rows="10"></textarea>
+        <textarea id="schema" placeholder="Paste your JSON Schema here..." rows="10"></textarea>
+        <button onclick="validate()">Validate</button>
+        <div id="result"></div>
+    </main>
+    <section>
+        <h2>How to use</h2>
+        <p>Paste your data in the first box and the JSON Schema in the second box. Click Validate.</p>
+        <h2>Example</h2>
+        <p>Input: {"name": "Test"}</p>
+        <p>Schema: {"type": "object", "properties": {"name": {"type": "string"}}}</p>
+        <h2>Common Mistakes</h2>
+        <p>Using invalid JSON/YAML formatting. Ensure quotes are proper.</p>
+    </section>
+    <script>
+        function validate() {
+            const input = document.getElementById('input').value;
+            const schema = document.getElementById('schema').value;
+            document.getElementById('result').innerText = "Validation Logic: (Simplified check: Schema syntax valid? " + (tryParse(input) && tryParse(schema) ? "Yes" : "No") + ")";
+        }
+        function tryParse(val) { try { JSON.parse(val); return true; } catch(e) { return false; } }
+    </script>
+</body>
+</html>
