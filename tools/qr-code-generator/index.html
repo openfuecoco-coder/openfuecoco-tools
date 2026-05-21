@@ -6,36 +6,54 @@
     <meta name="description" content="專業的 QR Code 生成器，支援顏色、透明度、容錯率調整與格式下載。">
     <link rel="stylesheet" href="../../shared/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .preview-box { display: flex; justify-content: center; align-items: center; background: #eee; padding: 20px; border-radius: 8px; min-height: 300px; }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>進階 QR Code 生成器</h1>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-            <label>內容: <input type="text" id="text" oninput="generate()" placeholder="https://example.com" style="width:100%;"></label>
-            <label>尺寸 (px): <input type="number" id="size" value="256" oninput="generate()"></label>
-            <label>背景色: <input type="color" id="bgColor" value="#ffffff" oninput="generate()"></label>
-            <label>QR碼顏色: <input type="color" id="fgColor" value="#000000" oninput="generate()"></label>
-            <label>透明度: <input type="range" id="opacity" min="0" max="1" step="0.1" value="1" oninput="generate()"></label>
-            <label>邊框 (padding): <input type="number" id="padding" value="10" oninput="generate()"></label>
-            <label>容錯率: 
-                <select id="ecLevel" onchange="generate()">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+            <div class="control-group">
+                <label>輸入內容</label>
+                <input type="text" id="text" oninput="generate()" placeholder="https://example.com" style="width:100%;">
+            </div>
+            <div class="control-group">
+                <label>尺寸 (px)</label>
+                <input type="number" id="size" value="256" oninput="generate()" style="width:100%;">
+            </div>
+            <div class="control-group">
+                <label>背景顏色 <input type="color" id="bgColor" value="#ffffff" oninput="generate()"></label>
+            </div>
+            <div class="control-group">
+                <label>QR碼顏色 <input type="color" id="fgColor" value="#000000" oninput="generate()"></label>
+            </div>
+            <div class="control-group">
+                <label>透明度</label>
+                <input type="range" id="opacity" min="0" max="1" step="0.1" value="1" oninput="generate()" style="width:100%;">
+            </div>
+            <div class="control-group">
+                <label>容錯率</label>
+                <select id="ecLevel" onchange="generate()" style="width:100%;">
                     <option value="1">L (7%)</option>
                     <option value="2">M (15%)</option>
                     <option value="3">Q (25%)</option>
                     <option value="0" selected>H (30%)</option>
                 </select>
-            </label>
+            </div>
         </div>
-        <div style="margin-top:15px;">
-            <label>中間Logo: <input type="file" id="logoInput" accept="image/*" onchange="generate()"></label>
-            <button onclick="download('png')">下載 PNG</button>
-            <button onclick="download('jpeg')">下載 JPG</button>
+        <div class="control-group">
+            <label>中間 Logo</label>
+            <input type="file" id="logoInput" accept="image/*" onchange="generate()">
         </div>
         
-        <div id="preview" style="margin-top:20px;"></div>
+        <div id="preview" class="preview-box"></div>
 
-        <h2>說明</h2>
-        <p>提供多種自訂選項，並支援直接下載圖片。</p>
+        <div style="margin-top:20px;">
+            <button onclick="alert('請在 QR Code 上按滑鼠右鍵「另存圖片」下載 PNG')">下載 PNG</button>
+        </div>
     </div>
     <script>
         let logoData = null;
@@ -47,38 +65,30 @@
 
         function generate() {
             const text = document.getElementById('text').value;
-            if (!text) return;
             const container = document.getElementById("preview");
             container.innerHTML = "";
+            if (!text) return;
+            
+            const size = parseInt(document.getElementById('size').value);
             const qrcode = new QRCode(container, {
                 text: text,
-                width: parseInt(document.getElementById('size').value),
-                height: parseInt(document.getElementById('size').value),
+                width: size,
+                height: size,
                 colorDark : document.getElementById('fgColor').value,
                 colorLight : document.getElementById('bgColor').value,
                 correctLevel : parseInt(document.getElementById('ecLevel').value)
             });
             
             container.style.opacity = document.getElementById('opacity').value;
-            container.style.padding = document.getElementById('padding').value + "px";
             container.style.backgroundColor = document.getElementById('bgColor').value;
 
             if (logoData) {
-                setTimeout(() => {
-                    const img = document.createElement("img");
-                    img.src = logoData;
-                    img.style.position = "absolute";
-                    img.style.top = "50%";
-                    img.style.left = "50%";
-                    img.style.transform = "translate(-50%, -50%)";
-                    img.style.width = "20%";
-                    container.appendChild(img);
-                }, 100);
+                const img = document.createElement("img");
+                img.src = logoData;
+                img.style.position = "absolute";
+                img.style.width = (size * 0.2) + "px";
+                container.appendChild(img);
             }
-        }
-
-        function download(type) {
-            alert("在前端環境中，請在 QR Code 上按滑鼠右鍵「另存圖片」即可下載。");
         }
     </script>
 </body>
