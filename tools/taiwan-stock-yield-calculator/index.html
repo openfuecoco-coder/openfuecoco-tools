@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>台灣股市殖利率計算機 | Open Fuecoco Tools</title>
+    <meta name="description" content="輕鬆計算台股殖利率、現金股利與股票股利後的除權息參考價。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "台灣股市殖利率計算機",
+      "description": "計算台股殖利率與除權息參考價。",
+      "applicationCategory": "FinanceTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/taiwan-stock-yield-calculator/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>台灣股市殖利率計算機</h1>
+        <div style="margin-bottom:15px;">
+            <label>目前股價 (元): <input type="number" id="price" placeholder="例如: 100"></label><br>
+            <label>現金股利 (元): <input type="number" id="cash" placeholder="例如: 5"></label><br>
+            <label>股票股利 (元): <input type="number" id="stock" placeholder="例如: 1"></label>
+        </div>
+        <button onclick="calculate()">開始計算</button>
+        
+        <div id="output" style="margin-top:20px; padding:15px; background:#fff; border:1px solid #C4B5A5;">
+            <!-- Results will appear here -->
+        </div>
+        
+        <h2>計算說明</h2>
+        <p>此工具提供台灣股市常見的殖利率估算：</p>
+        <ul>
+            <li><strong>現金殖利率：</strong> (現金股利 / 股價) * 100%</li>
+            <li><strong>除權息參考價：</strong> (股價 - 現金股利) / (1 + 股票股利/10)</li>
+        </ul>
+
+        <h2>Related tools</h2>
+        <a href="../endianness-converter/">Endianness Converter</a>
+    </div>
+    <script>
+        function calculate() {
+            const price = parseFloat(document.getElementById('price').value);
+            const cash = parseFloat(document.getElementById('cash').value);
+            const stock = parseFloat(document.getElementById('stock').value);
+
+            if (isNaN(price) || price <= 0) {
+                alert("請輸入正確股價");
+                return;
+            }
+            
+            const cashVal = isNaN(cash) ? 0 : cash;
+            const stockVal = isNaN(stock) ? 0 : stock;
+
+            const yieldRate = ((cashVal + (stockVal * 1)) / price * 100).toFixed(2);
+            const refPrice = ((price - cashVal) / (1 + (stockVal / 10))).toFixed(2);
+
+            document.getElementById('output').innerHTML = 
+                `<strong>估算殖利率: ${yieldRate}%</strong><br>` +
+                `<strong>除權息參考價: ${refPrice} 元</strong>`;
+        }
+    </script>
+</body>
+</html>
