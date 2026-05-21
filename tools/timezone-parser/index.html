@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone / ISO-8601 Date Parser | Fueco Tools</title>
+    <meta name="description" content="Quickly parse, convert, and format ISO-8601 dates and timezones.">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Timezone / ISO-8601 Date Parser",
+        "description": "Quickly parse, convert, and format ISO-8601 dates and timezones.",
+        "applicationCategory": "DeveloperTool"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Timezone / ISO-8601 Date Parser</h1>
+    </header>
+    <main>
+        <section>
+            <input type="text" id="dateInput" placeholder="Enter ISO-8601 date string..." style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <button onclick="parseDate()">Parse Date</button>
+            <div id="result" style="margin-top: 20px; white-space: pre-wrap; background: #eee; padding: 10px;"></div>
+        </section>
+
+        <section>
+            <h2>How to use</h2>
+            <p>Enter an ISO-8601 string (e.g., 2026-05-21T08:07:00Z) and click Parse.</p>
+            <h3>Example input</h3>
+            <p><code>2026-05-21T08:07:00Z</code></p>
+            <h3>Common mistakes</h3>
+            <ul>
+                <li>Missing "Z" or offset for UTC.</li>
+                <li>Incorrect format strings.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Related tools</h2>
+            <ul>
+                <li><a href="../timestamp-converter/">Timestamp Converter</a></li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        function parseDate() {
+            const input = document.getElementById('dateInput').value;
+            const date = new Date(input);
+            const resultDiv = document.getElementById('result');
+            if (isNaN(date.getTime())) {
+                resultDiv.innerText = "Invalid Date string.";
+            } else {
+                resultDiv.innerText = `UTC: ${date.toUTCString()}\nLocal: ${date.toString()}`;
+            }
+        }
+    </script>
+</body>
+</html>
