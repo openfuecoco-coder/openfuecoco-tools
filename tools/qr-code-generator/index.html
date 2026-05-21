@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code 生成器 | Open Fuecoco Tools</title>
+    <meta name="description" content="將文字或連結轉換為 QR Code。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "QR Code 生成器",
+      "description": "將文字轉為 QR Code。",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0" },
+      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/qr-code-generator/"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code 生成器</h1>
+        <p>輸入內容即可產生 QR Code:</p>
+        <input type="text" id="text" placeholder="https://example.com" style="width:100%; padding:8px; margin-bottom:10px;">
+        <button onclick="generate()">生成 QR Code</button>
+        
+        <div id="qrcode" style="margin-top:20px;"></div>
+        
+        <h2>說明</h2>
+        <p>使用 qrcode.js 在瀏覽器端直接產生。</p>
+
+        <h2>Related tools</h2>
+        <a href="../url-shortener/">短網址生成器</a>
+    </div>
+    <script>
+        function generate() {
+            const text = document.getElementById('text').value;
+            const container = document.getElementById("qrcode");
+            container.innerHTML = "";
+            if (!text) return alert("請輸入內容");
+            new QRCode(container, text);
+        }
+    </script>
+</body>
+</html>
