@@ -17,10 +17,8 @@
     </script>
 </head>
 <body>
-    <header>
+    <div class="container">
         <h1>Markdown 表格產生器</h1>
-    </header>
-    <main>
         <p>請在下方輸入您的資料，每行代表一行，以逗號、分號或Tab鍵分隔各欄位。</p>
         <textarea id="input" rows="10" placeholder="輸入資料，例如：
 Header1,Header2,Header3
@@ -32,73 +30,49 @@ Row2Col1,Row2Col2,Row2Col3"></textarea>
         <section>
             <h2>使用說明</h2>
             <p>1. 在上方輸入框貼上或輸入您的資料。<br>2. 每行代表表格的一列。<br>3. 欄位之間請使用逗號 (,)、分號 (;) 或 Tab 鍵分隔。<br>4. 點擊「生成 Markdown 表格」按鈕即可在下方輸出框看到結果。</p>
-
-            <h3>範例輸入</h3>
-            <pre>Name,Age,City
-Alice,30,New York
-Bob,24,London</pre>
-            <h3>範例輸出</h3>
-            <pre>| Name | Age | City |
-|------|-----|------|
-| Alice | 30 | New York |
-| Bob | 24 | London |</pre>
-
-            <h3>常見錯誤</h3>
-            <p>1. 欄位分隔符不一致可能導致表格格式混亂。<br>2. 確保所有行都有相同數量的欄位，否則表格可能無法對齊。</p>
         </section>
-        <nav>
-            <p>相關工具: <a href="../json-formatter/index.html">JSON 格式化</a>, <a href="../sql-query-formatter/index.html">SQL 查詢格式化</a></p>
-        </nav>
-    </main>
+    </div>
     <script>
         function generateMarkdownTable() {
             const input = document.getElementById('input').value;
             const lines = input.trim().split('\n');
-            if (lines.length === 0) {
+            if (lines.length === 0 || lines[0] === '') {
                 document.getElementById('output').value = '';
                 return;
             }
 
-            // Determine separator (comma, semicolon, or tab)
-            let separator = ',;'; // default to comma or semicolon
-            if (lines[0].includes('\t')) {
-                separator = '\t';
-            } else if (lines[0].includes(';')) {
-                separator = ';
-            } else if (lines[0].includes(',')) {
-                separator = ',';
-            }
+            // Determine separator
+            let separator = ',';
+            if (lines[0].includes('\t')) separator = '\t';
+            else if (lines[0].includes(';')) separator = ';';
+            else if (lines[0].includes(',')) separator = ',';
 
-            const cells = lines.map(line => line.split(new RegExp(`[${separator}]`)));
+            const cells = lines.map(line => line.split(separator));
 
             // Calculate max column widths
             const numCols = cells[0].length;
             const colWidths = Array(numCols).fill(0);
             cells.forEach(row => {
                 row.forEach((cell, i) => {
-                    colWidths[i] = Math.max(colWidths[i], cell.trim().length);
+                    colWidths[i] = Math.max(colWidths[i], (cell ? cell.trim().length : 0));
                 });
             });
 
             let output = '';
 
             // Header
-            output += '| ' + cells[0].map((cell, i) => cell.trim().padEnd(colWidths[i])).join(' | ') + ' |
-';
+            output += '| ' + cells[0].map((cell, i) => (cell ? cell.trim().padEnd(colWidths[i]) : '').padEnd(colWidths[i])).join(' | ') + ' |\n';
 
             // Separator line
-            output += '| ' + colWidths.map(width => '-'.repeat(width)).join(' | ') + ' |
-';
+            output += '| ' + colWidths.map(width => '-'.repeat(width)).join(' | ') + ' |\n';
 
             // Body
             for (let i = 1; i < cells.length; i++) {
-                output += '| ' + cells[i].map((cell, j) => cell.trim().padEnd(colWidths[j])).join(' | ') + ' |
-';
+                output += '| ' + cells[i].map((cell, j) => (cell ? cell.trim().padEnd(colWidths[j]) : '').padEnd(colWidths[j])).join(' | ') + ' |\n';
             }
 
             document.getElementById('output').value = output.trim();
         }
     </script>
-    <script src="../../shared/ads.js"></script>
 </body>
 </html>
