@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Case Converter - Uppercase, Lowercase, Title Case Tool</title>
+    <meta name="description" content="Easily convert text to uppercase, lowercase, title case, sentence case, or toggle case online. Free and simple text transformation tool.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebApplication",
+      "name": "Text Case Converter",
+      "url": "https://openfuecoco.github.io/openfuecoco-tools/tools/text-case-converter/",
+      "applicationCategory": "Utilities",
+      "operatingSystem": "Any",
+      "description": "An online tool to convert text to different cases: uppercase, lowercase, title case, sentence case, and toggle case.",
+      "featureList": [
+        "Uppercase conversion",
+        "Lowercase conversion",
+        "Title Case conversion",
+        "Sentence Case conversion",
+        "Toggle Case conversion"
+      ],
+      "softwareRequirements": "Web browser"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Text Case Converter</h1>
+    </header>
+    <main>
+        <section class="tool-section">
+            <h2>Tool Body</h2>
+            <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+            <div class="buttons">
+                <button onclick="convertToUppercase()">UPPERCASE</button>
+                <button onclick="convertToLowercase()">lowercase</button>
+                <button onclick="convertToTitleCase()">Title Case</button>
+                <button onclick="convertToSentenceCase()">Sentence case</button>
+                <button onclick="convertToToggleCase()">tOgGlE cAsE</button>
+                <button onclick="clearText()">Clear</button>
+            </div>
+            <textarea id="outputText" placeholder="Converted text will appear here..." readonly></textarea>
+        </section>
+
+        <section class="info-section">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Enter your text into the "Enter your text here..." box.</li>
+                <li>Click on any of the conversion buttons (UPPERCASE, lowercase, Title Case, Sentence case, tOgGlE cAsE) to transform your text.</li>
+                <li>The converted text will appear in the "Converted text will appear here..." box, ready for you to copy.</li>
+                <li>Use the "Clear" button to reset both text areas.</li>
+            </ol>
+        </section>
+
+        <section class="info-section">
+            <h2>Example Input</h2>
+            <p><strong>Input:</strong> <code>Hello world, this is a test.</code></p>
+            <p><strong>Output (UPPERCASE):</strong> <code>HELLO WORLD, THIS IS A TEST.</code></p>
+            <p><strong>Output (Title Case):</strong> <code>Hello World, This Is A Test.</code></p>
+        </section>
+
+        <section class="info-section">
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li>Forgetting to copy the output text before clearing the fields.</li>
+                <li>Expecting complex formatting (like bold, italics) to be preserved; this tool only handles character casing.</li>
+                <li>Not understanding "Title Case" vs. "Sentence Case": Title Case capitalizes the first letter of each major word, while Sentence Case only capitalizes the first letter of the sentence.</li>
+            </ul>
+        </section>
+
+        <section class="info-section">
+            <h2>Related Tools</h2>
+            <ul>
+                <li><a href="../word-counter/">Word Counter</a></li>
+                <li><a href="../character-counter/">Character Counter</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Open Fuecoco Tools</p>
+    </footer>
+    <script>
+        function updateOutput(text) {
+            document.getElementById('outputText').value = text;
+        }
+
+        function getInputText() {
+            return document.getElementById('inputText').value;
+        }
+
+        function convertToUppercase() {
+            updateOutput(getInputText().toUpperCase());
+        }
+
+        function convertToLowercase() {
+            updateOutput(getInputText().toLowerCase());
+        }
+
+        function convertToTitleCase() {
+            let text = getInputText();
+            updateOutput(text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
+        }
+
+        function convertToSentenceCase() {
+            let text = getInputText().toLowerCase();
+            if (text.length > 0) {
+                updateOutput(text.charAt(0).toUpperCase() + text.slice(1));
+            } else {
+                updateOutput('');
+            }
+        }
+
+        function convertToToggleCase() {
+            let text = getInputText();
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                if (i % 2 === 0) {
+                    result += text.charAt(i).toLowerCase();
+                } else {
+                    result += text.charAt(i).toUpperCase();
+                }
+            }
+            updateOutput(result);
+        }
+
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
