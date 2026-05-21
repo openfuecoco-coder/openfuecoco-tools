@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片格式最佳化工具 (WebP/AVIF) | Image Format Optimizer | Fueco Tools</title>
+    <meta name="description" content="線上圖片格式轉換工具，將圖片轉換為 WebP 或 AVIF 格式以縮減檔案大小並提升網頁效能。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "圖片格式最佳化工具",
+      "description": "線上圖片格式轉換工具，將圖片轉換為 WebP 或 AVIF 格式以提升網頁載入速度。",
+      "applicationCategory": "DeveloperTool"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>圖片格式最佳化工具</h1>
+    </header>
+    <main>
+        <p>本工具示範瀏覽器端的圖片處理概念。請選擇一張圖片，轉換為 WebP 格式。</p>
+        <input type="file" id="upload" accept="image/*">
+        <select id="format">
+            <option value="image/webp">WebP</option>
+            <option value="image/png">PNG (轉碼測試)</option>
+        </select>
+        <button onclick="convertImage()">轉換圖片</button>
+        <br><br>
+        <img id="preview" style="max-width: 100%; display: none;">
+        <br>
+        <a id="download" style="display: none;">下載轉換後的圖片</a>
+
+        <section>
+            <h2>使用說明</h2>
+            <p>1. 點擊「選擇檔案」上傳您的圖片 (JPG, PNG, 等)。<br>2. 選擇目標格式 (目前支援 WebP)。<br>3. 點擊「轉換圖片」進行處理。<br>4. 轉換完成後，點擊顯示的下載連結儲存圖片。</p>
+
+            <h3>常見錯誤</h3>
+            <p>1. 瀏覽器不支援某些格式的編碼可能會導致轉換失敗。<br>2. 過大的圖片可能會在處理時暫時凍結瀏覽器，請耐心等待。</p>
+        </section>
+        <nav>
+            <p>相關工具: <a href="../qr-code-generator/index.html">QR Code 產生器</a>, <a href="../base64-converter/index.html">Base64 轉換器</a></p>
+        </nav>
+    </main>
+    <script>
+        function convertImage() {
+            const fileInput = document.getElementById('upload');
+            const file = fileInput.files[0];
+            if (!file) { alert('請先選擇圖片'); return; }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    
+                    const format = document.getElementById('format').value;
+                    const dataUrl = canvas.toDataURL(format);
+                    
+                    const preview = document.getElementById('preview');
+                    preview.src = dataUrl;
+                    preview.style.display = 'block';
+                    
+                    const download = document.getElementById('download');
+                    download.href = dataUrl;
+                    download.download = 'converted-image.' + (format === 'image/webp' ? 'webp' : 'png');
+                    download.innerText = '下載 ' + (format === 'image/webp' ? 'WebP' : 'PNG');
+                    download.style.display = 'block';
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>

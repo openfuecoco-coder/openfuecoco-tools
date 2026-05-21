@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 表格產生器 | Markdown Table Generator | Fueco Tools</title>
+    <meta name="description" content="輕鬆將文字資料轉換為標準 Markdown 表格格式。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Markdown 表格產生器",
+      "description": "線上工具，將普通文字內容轉換為Markdown表格，方便快速編輯。",
+      "applicationCategory": "DeveloperTool"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Markdown 表格產生器</h1>
+    </header>
+    <main>
+        <p>請在下方輸入您的資料，每行代表一行，以逗號、分號或Tab鍵分隔各欄位。</p>
+        <textarea id="input" rows="10" placeholder="輸入資料，例如：
+Header1,Header2,Header3
+Row1Col1,Row1Col2,Row1Col3
+Row2Col1,Row2Col2,Row2Col3"></textarea>
+        <button onclick="generateMarkdownTable()">生成 Markdown 表格</button>
+        <textarea id="output" rows="10" readonly></textarea>
+
+        <section>
+            <h2>使用說明</h2>
+            <p>1. 在上方輸入框貼上或輸入您的資料。<br>2. 每行代表表格的一列。<br>3. 欄位之間請使用逗號 (,)、分號 (;) 或 Tab 鍵分隔。<br>4. 點擊「生成 Markdown 表格」按鈕即可在下方輸出框看到結果。</p>
+
+            <h3>範例輸入</h3>
+            <pre>Name,Age,City
+Alice,30,New York
+Bob,24,London</pre>
+            <h3>範例輸出</h3>
+            <pre>| Name | Age | City |
+|------|-----|------|
+| Alice | 30 | New York |
+| Bob | 24 | London |</pre>
+
+            <h3>常見錯誤</h3>
+            <p>1. 欄位分隔符不一致可能導致表格格式混亂。<br>2. 確保所有行都有相同數量的欄位，否則表格可能無法對齊。</p>
+        </section>
+        <nav>
+            <p>相關工具: <a href="../json-formatter/index.html">JSON 格式化</a>, <a href="../sql-query-formatter/index.html">SQL 查詢格式化</a></p>
+        </nav>
+    </main>
+    <script>
+        function generateMarkdownTable() {
+            const input = document.getElementById('input').value;
+            const lines = input.trim().split('\n');
+            if (lines.length === 0) {
+                document.getElementById('output').value = '';
+                return;
+            }
+
+            // Determine separator (comma, semicolon, or tab)
+            let separator = ',;'; // default to comma or semicolon
+            if (lines[0].includes('\t')) {
+                separator = '\t';
+            } else if (lines[0].includes(';')) {
+                separator = ';
+            } else if (lines[0].includes(',')) {
+                separator = ',';
+            }
+
+            const cells = lines.map(line => line.split(new RegExp(`[${separator}]`)));
+
+            // Calculate max column widths
+            const numCols = cells[0].length;
+            const colWidths = Array(numCols).fill(0);
+            cells.forEach(row => {
+                row.forEach((cell, i) => {
+                    colWidths[i] = Math.max(colWidths[i], cell.trim().length);
+                });
+            });
+
+            let output = '';
+
+            // Header
+            output += '| ' + cells[0].map((cell, i) => cell.trim().padEnd(colWidths[i])).join(' | ') + ' |
+';
+
+            // Separator line
+            output += '| ' + colWidths.map(width => '-'.repeat(width)).join(' | ') + ' |
+';
+
+            // Body
+            for (let i = 1; i < cells.length; i++) {
+                output += '| ' + cells[i].map((cell, j) => cell.trim().padEnd(colWidths[j])).join(' | ') + ' |
+';
+            }
+
+            document.getElementById('output').value = output.trim();
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
