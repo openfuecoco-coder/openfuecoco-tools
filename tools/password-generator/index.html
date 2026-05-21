@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator - Secure Online Utility</title>
+    <meta name="description" content="Generate secure, random passwords instantly with this free online password generator. Customizable options for length and character sets.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebApplication",
+      "name": "Password Generator",
+      "url": "https://openfuecoco.github.io/openfuecoco-tools/tools/password-generator/",
+      "applicationCategory": "Security",
+      "operatingSystem": "Any",
+      "description": "A free tool to generate strong, random passwords.",
+      "featureList": [
+        "Customizable length",
+        "Include uppercase",
+        "Include numbers",
+        "Include special characters"
+      ],
+      "softwareRequirements": "Web browser"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Password Generator</h1>
+    </header>
+    <main>
+        <section class="tool-section">
+            <h2>Tool Body</h2>
+            <div class="controls">
+                <label>Length: <input type="number" id="length" value="16" min="4" max="64"></label><br>
+                <label><input type="checkbox" id="uppercase" checked> Include Uppercase</label><br>
+                <label><input type="checkbox" id="numbers" checked> Include Numbers</label><br>
+                <label><input type="checkbox" id="symbols" checked> Include Symbols</label><br>
+                <button onclick="generatePassword()">Generate Password</button>
+            </div>
+            <input type="text" id="password" readonly placeholder="Your secure password...">
+        </section>
+
+        <section class="info-section">
+            <h2>How to Use</h2>
+            <ol>
+                <li>Select the desired length and character requirements.</li>
+                <li>Click "Generate Password".</li>
+                <li>Copy the result.</li>
+            </ol>
+        </section>
+    </main>
+    <script>
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const useUppercase = document.getElementById('uppercase').checked;
+            const useNumbers = document.getElementById('numbers').checked;
+            const useSymbols = document.getElementById('symbols').checked;
+            
+            let charset = "abcdefghijklmnopqrstuvwxyz";
+            if (useUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (useNumbers) charset += "0123456789";
+            if (useSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            document.getElementById('password').value = password;
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>

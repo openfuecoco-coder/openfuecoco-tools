@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/</loc></url>
   <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/url-encoder/</loc></url>
+  <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/password-generator/</loc></url>
   <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/unit-converter/</loc></url>
   <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/timestamp-converter/</loc></url>
   <url><loc>https://openfuecoco-coder.github.io/openfuecoco-tools/tools/uuid-generator/</loc></url>

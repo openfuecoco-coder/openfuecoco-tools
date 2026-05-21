@@ -1,3 +1,3 @@
-- [x] Create a "Text Case Converter" tool at tools/text-case-converter/index.html
-- [ ] Create a "Base64 Encoder/Decoder" tool at tools/base64-converter/index.html
-- [ ] Create a "URL Encoder/Decoder" tool at tools/url-converter/index.html
+- [ ] Create a "Password Generator" tool at tools/password-generator/index.html
+- [ ] Create a "Markdown Previewer" tool at tools/markdown-previewer/index.html
+- [ ] Create a "JSON to CSV Converter" tool at tools/json-to-csv/index.html
