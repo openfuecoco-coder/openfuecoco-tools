@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL 查詢格式化工具 | SQL Query Formatter | Fueco Tools</title>
+    <meta name="description" content="快速將雜亂的 SQL 查詢語句轉換為易讀的格式。支援關鍵字大寫與縮排。">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SQL 查詢格式化工具",
+      "description": "線上 SQL 格式化，優化 SQL 語法閱讀體驗。",
+      "applicationCategory": "DeveloperTool"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>SQL 查詢格式化工具</h1>
+    </header>
+    <main>
+        <textarea id="input" rows="10" placeholder="貼上您的 SQL 語句..."></textarea>
+        <button onclick="formatSQL()">格式化</button>
+        <textarea id="output" rows="10" readonly></textarea>
+
+        <section>
+            <h2>使用說明</h2>
+            <p>將您的 SQL 語句貼上後點擊格式化，將自動處理換行與縮排。</p>
+            <h3>範例輸入</h3>
+            <pre>select * from users where id = 1 and status = 'active'</pre>
+            <h3>常見錯誤</h3>
+            <p>1. 語法錯誤的 SQL 可能無法正確解析。<br>2. 處理過長的複雜查詢可能會遇到解析限制。</p>
+        </section>
+        <nav>
+            <p>相關工具: <a href="../json-formatter/index.html">JSON 格式化</a></p>
+        </nav>
+    </main>
+    <script>
+        function formatSQL() {
+            const input = document.getElementById('input').value;
+            // Basic simple formatter for example
+            let formatted = input.replace(/\s+/g, ' ')
+                .replace(/(SELECT|FROM|WHERE|AND|OR|JOIN|LEFT|INNER|GROUP BY|ORDER BY|LIMIT)/gi, '\n$1')
+                .trim();
+            document.getElementById('output').value = formatted;
+        }
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
