@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Parser</title>
+    <link rel="stylesheet" href="../../style_template.css">
+    <style>
+        input { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background-color: #C4B5A5; color: white; padding: 10px; border: none; cursor: pointer; }
+        pre { background: #E8E4D9; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Parser</h1>
+        <input type="text" id="urlInput" placeholder="輸入 URL (例如: https://example.com/path?query=1)">
+        <button onclick="parseUrl()">解析 URL</button>
+        <pre id="output"></pre>
+    </div>
+    <script>
+        function parseUrl() {
+            try {
+                const url = new URL(document.getElementById('urlInput').value);
+                const result = {
+                    protocol: url.protocol,
+                    hostname: url.hostname,
+                    pathname: url.pathname,
+                    search: url.search,
+                    hash: url.hash
+                };
+                document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+            } catch (e) {
+                document.getElementById('output').textContent = "無效的 URL";
+            }
+        }
+    </script>
+</body>
+</html>
