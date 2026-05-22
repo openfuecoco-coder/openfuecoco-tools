@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to JSON Converter</title>
+    <link rel="stylesheet" href="../../style_template.css">
+    <style>
+        /* Add specific styles for this tool if needed */
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #C4B5A5;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #FDFBF7;
+            color: #4A4036;
+        }
+        button {
+            background-color: #C4B5A5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV to JSON Converter</h1>
+        <div class="card">
+            <p>输入您的 CSV 数据:</p>
+            <textarea id="csvInput" placeholder="例如:
+header1,header2,header3
+value1a,value1b,value1c
+value2a,value2b,value2c"></textarea>
+            <button onclick="convertCsvToJson()">转换</button>
+            <p>输出 JSON 数据:</p>
+            <textarea id="jsonOutput" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        function convertCsvToJson() {
+            const csv = document.getElementById('csvInput').value;
+            const lines = csv.split('\n');
+            const result = [];
+            const headers = lines[0].split(',').map(header => header.trim());
+
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue; // Skip empty lines
+                const obj = {};
+                const currentLine = lines[i].split(',').map(item => item.trim());
+
+                if (currentLine.length !== headers.length) {
+                    // Handle cases where a line might have fewer or more items than headers
+                    console.warn(`Line ${i + 1} has a different number of items than headers. Skipping or adjusting.`);
+                    // For simplicity, we'll just skip this line for now or adjust based on minimum length
+                    // A more robust solution might pad with null or handle errors explicitly
+                    continue; 
+                }
+
+                for (let j = 0; j < headers.length; j++) {
+                    obj[headers[j]] = currentLine[j];
+                }
+                result.push(obj);
+            }
+            document.getElementById('jsonOutput').value = JSON.stringify(result, null, 2);
+        }
+    </script>
+</body>
+</html>

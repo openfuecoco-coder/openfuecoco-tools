@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query Formatter</title>
+    <link rel="stylesheet" href="../../style_template.css">
+    <style>
+        textarea {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #C4B5A5;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #FDFBF7;
+            color: #4A4036;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+        }
+        button {
+            background-color: #C4B5A5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .keyword {
+            color: #A52A2A; /* Brown */
+            font-weight: bold;
+        }
+        .identifier {
+            color: #0000FF; /* Blue */
+        }
+        .string {
+            color: #2E8B57; /* SeaGreen */
+        }
+        .comment {
+            color: #808080; /* Gray */
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SQL Query Formatter</h1>
+        <div class="card">
+            <p>输入您的 SQL 查询:</p>
+            <textarea id="sqlInput" placeholder="例如:
+SELECT name, age FROM users WHERE age > 30;"></textarea>
+            <button onclick="formatSqlQuery()">格式化</button>
+            <p>格式化后的 SQL 查询:</p>
+            <textarea id="formattedSqlOutput" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        function formatSqlQuery() {
+            const sql = document.getElementById('sqlInput').value;
+            const formattedSql = formatSql(sql);
+            document.getElementById('formattedSqlOutput').value = formattedSql;
+        }
+
+        // Basic SQL formatter function (simplified)
+        function formatSql(sql) {
+            const keywords = ['SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'INSERT', 'INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE', 'CREATE', 'TABLE', 'ALTER', 'DROP', 'JOIN', 'ON', 'GROUP', 'BY', 'ORDER', 'HAVING', 'LIMIT', 'OFFSET', 'NULL', 'TRUE', 'FALSE', 'AS', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END', 'CAST', 'CONVERT'];
+            const lines = sql.split('\n');
+            let formattedLines = [];
+            let indentLevel = 0;
+
+            lines.forEach(line => {
+                let processedLine = line.trim();
+                if (processedLine === '') return;
+
+                // Basic indentation logic
+                if (processedLine.toUpperCase().startsWith('SELECT') || 
+                    processedLine.toUpperCase().startsWith('INSERT') || 
+                    processedLine.toUpperCase().startsWith('UPDATE') || 
+                    processedLine.toUpperCase().startsWith('CREATE') || 
+                    processedLine.toUpperCase().startsWith('ALTER') || 
+                    processedLine.toUpperCase().startsWith('DELETE')) {
+                    
+                    // Decrease indent for statements that end a block if they are on their own line (simplistic)
+                    if (formattedLines.length > 0 && formattedLines[formattedLines.length - 1].trim().match(/^(WHERE|GROUP BY|ORDER BY|HAVING|SET|VALUES)\b/i)) {
+                        indentLevel = Math.max(0, indentLevel - 1);
+                    }
+                    formattedLines.push(' '.repeat(indentLevel * 4) + processedLine);
+                    // Increase indent for SELECT clauses, WHERE, JOINs etc. (simplistic)
+                    if (processedLine.toUpperCase().match(/^(SELECT|FROM|WHERE|JOIN|GROUP BY|ORDER BY|HAVING|SET)/)) {
+                         indentLevel++;
+                    }
+                } else {
+                    formattedLines.push(' '.repeat(indentLevel * 4) + processedLine);
+                }
+            });
+
+            // Basic keyword highlighting (for display, not functional SQL)
+            let highlightedSql = formattedLines.join('\n');
+            keywords.forEach(keyword => {
+                const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+                highlightedSql = highlightedSql.replace(regex, `<span class="keyword">$&</span>`);
+            });
+            
+            // Placeholder for other highlighting (identifiers, strings, comments) - requires more sophisticated parsing
+
+            return highlightedSql;
+        }
+
+    </script>
+</body>
+</html>

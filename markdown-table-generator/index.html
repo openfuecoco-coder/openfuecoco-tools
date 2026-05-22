@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Table Generator</title>
+    <link rel="stylesheet" href="../../style_template.css">
+    <style>
+        textarea { width: 100%; height: 150px; margin: 10px 0; }
+        button { background-color: #C4B5A5; color: white; padding: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Markdown Table Generator</h1>
+        <textarea id="dataInput" placeholder="輸入數據，以逗號分隔 (CSV)"></textarea>
+        <button onclick="generateTable()">產生 Markdown</button>
+        <textarea id="output" readonly></textarea>
+    </div>
+    <script>
+        function generateTable() {
+            const data = document.getElementById('dataInput').value.split('\n');
+            let table = '| ' + data[0].split(',').join(' | ') + ' |\n';
+            table += '| ' + data[0].split(',').map(() => '---').join(' | ') + ' |\n';
+            for(let i=1; i<data.length; i++) {
+                if(data[i].trim()) table += '| ' + data[i].split(',').join(' | ') + ' |\n';
+            }
+            document.getElementById('output').value = table;
+        }
+    </script>
+</body>
+</html>
