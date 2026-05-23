@@ -3,145 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT Decoder | Decode JSON Web Tokens Online - Open Fuecoco Tools</title>
-    <meta name="description" content="Free online JWT decoder. Securely decode JSON Web Tokens (JWT) to view the header and payload without sending data to a server.">
+    <title>JWT Decoder - Decode JSON Web Tokens Online</title>
+    <meta name="description" content="Free online JWT decoder. Decode JSON Web Tokens (JWT) to view header and payload without sending data to a server. Secure and private.">
     <link rel="stylesheet" href="../../shared/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "JWT Decoder",
-      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/jwt-decoder/",
-      "description": "Free online JWT decoder. Securely decode JSON Web Tokens (JWT) to view the header and payload.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Any"
+      "url": "https://openfuecoco.github.io/openfuecoco-tools/tools/jwt-decoder/",
+      "applicationCategory": "Developer Tool",
+      "operatingSystem": "Any",
+      "description": "Decode JSON Web Tokens (JWT) to view header and payload securely in your browser."
     }
     </script>
-    <style>
-        .jwt-container { display: flex; flex-direction: column; gap: 20px; }
-        .jwt-input-area { display: flex; flex-direction: column; gap: 10px; }
-        textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #C4B5A5; border-radius: 4px; font-family: monospace; }
-        .jwt-results { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 768px) { .jwt-results { grid-template-columns: 1fr; } }
-        .result-box { display: flex; flex-direction: column; gap: 5px; }
-        .result-box pre { background: #f9f9f9; padding: 10px; border: 1px solid #E8E4D9; border-radius: 4px; overflow-x: auto; min-height: 50px; white-space: pre-wrap; word-break: break-all; }
-        .error { color: #d9534f; font-weight: bold; margin-top: 10px; }
-        .jwt-part-header { color: #fb015b; }
-        .jwt-part-payload { color: #00b159; }
-        .jwt-part-signature { color: #0033ff; }
-    </style>
 </head>
 <body>
     <div class="container">
         <h1>JWT Decoder</h1>
-        <p>Securely decode JSON Web Tokens (JWT) to inspect their contents. Decoding happens entirely in your browser; no data is sent to any server.</p>
+        
+        <label for="jwtInput">Enter JWT Token:</label>
+        <textarea id="jwtInput" rows="5" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
+        
+        <button onclick="decodeJWT()">Decode</button>
+        
+        <div id="error" style="color: red; margin-top: 10px; display: none;"></div>
 
-        <div class="jwt-container">
-            <div class="jwt-input-area">
-                <label for="jwtInput">Paste your JWT here:</label>
-                <textarea id="jwtInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
-                <div id="errorMessage" class="error"></div>
-            </div>
-
-            <div class="jwt-results">
-                <div class="result-box">
-                    <strong>Header <span class="jwt-part-header">(Red)</span></strong>
-                    <pre id="jwtHeader">{}</pre>
-                </div>
-                <div class="result-box">
-                    <strong>Payload <span class="jwt-part-payload">(Green)</span></strong>
-                    <pre id="jwtPayload">{}</pre>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-        <section class="guide">
-            <h2>How to Use</h2>
-            <ol>
-                <li>Copy the JWT (JSON Web Token) you want to decode.</li>
-                <li>Paste it into the input box above.</li>
-                <li>The tool will automatically decode the <strong>Header</strong> and <strong>Payload</strong> in real-time.</li>
-            </ol>
-
-            <h2>Example Input</h2>
-            <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</code>
-
-            <h2>Common Mistakes</h2>
-            <ul>
-                <li><strong>Confusing Decoding with Verification:</strong> This tool only <em>decodes</em> the token. It does NOT <em>verify</em> the signature. A decoded token is not necessarily a valid or trusted token.</li>
-                <li><strong>Wrong Format:</strong> Ensure you are pasting a valid JWT. A JWT should have three parts separated by dots (<code>.</code>).</li>
-                <li><strong>Including "Bearer " prefix:</strong> If you copied the token from an Authorization header, remove the word <code>Bearer </code> before pasting.</li>
-            </ul>
-
-            <h2>Related Tools</h2>
-            <ul>
-                <li><a href="../base64-converter/">Base64 Converter</a></li>
-                <li><a href="../json-formatter/">JSON Formatter</a></li>
-            </ul>
-        </section>
+        <label>Header:</label>
+        <pre id="headerOutput" style="background: #fff; padding: 10px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; border: 1px solid #C4B5A5; min-height: 40px;"></pre>
+        
+        <label>Payload:</label>
+        <pre id="payloadOutput" style="background: #fff; padding: 10px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; border: 1px solid #C4B5A5; min-height: 40px;"></pre>
+        
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #C4B5A5;">
+        
+        <h2>How to Use</h2>
+        <p>Paste your JSON Web Token (JWT) into the text area above and click "Decode". The tool will split the token into its three components (Header, Payload, and Signature) and decode the Base64Url encoded JSON parts.</p>
+        
+        <h2>Example Input</h2>
+        <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoyNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</code>
+        
+        <h2>Common Mistakes</h2>
+        <ul>
+            <li><strong>Trying to decode the signature:</strong> The signature is a cryptographic hash, not encoded JSON. It cannot be "decoded" to text.</li>
+            <li><strong>Invalid Format:</strong> Ensure the token contains exactly two dots (three parts). If it's missing a part, it's not a valid JWT.</li>
+            <li><strong>Wrong Base64 encoding:</strong> This tool uses Base64Url decoding. Standard Base64 decoders might fail if the token contains '-' or '_'.</li>
+        </ul>
+        
+        <h2>Related Tools</h2>
+        <ul>
+            <li><a href="../json-to-yaml/index.html">JSON to YAML Converter</a></li>
+            <li><a href="../yaml-to-json/index.html">YAML to JSON Converter</a></li>
+        </ul>
     </div>
 
     <script>
-        const jwtInput = document.getElementById('jwtInput');
-        const jwtHeader = document.getElementById('jwtHeader');
-        const jwtPayload = document.getElementById('jwtPayload');
-        const errorMessage = document.getElementById('errorMessage');
-
         function base64UrlDecode(str) {
+            // Replace Base64Url characters with Base64 characters
+            let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+            
+            // Add padding if necessary
+            while (base64.length % 4) {
+                base64 += '=';
+            }
+            
             try {
-                // Replace Base64Url characters with Base64 characters
-                let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
-                
-                // Add padding if needed
-                while (base64.length % 4) {
-                    base64 += '=';
-                }
-                
-                const binaryString = atob(base64);
-                const bytes = new Uint8Array(binaryString.length);
-                for (let i = 0; i < binaryString.length; i++) {
-                    bytes[i] = binaryString.charCodeAt(i);
-                }
-                return new TextDecoder().decode(bytes);
+                // Use atob and decodeURIComponent to handle UTF-8 characters
+                return decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
             } catch (e) {
-                throw new Error('Invalid base64 encoding');
+                throw new Error('Invalid Base64 encoding');
             }
         }
 
         function decodeJWT() {
-            const token = jwtInput.value.trim();
-            errorMessage.textContent = '';
+            const token = document.getElementById('jwtInput').value.trim();
+            const errorDiv = document.getElementById('error');
+            const headerOut = document.getElementById('headerOutput');
+            const payloadOut = document.getElementById('payloadOutput');
             
-            if (!token) {
-                jwtHeader.textContent = '{}';
-                jwtPayload.textContent = '{}';
-                return;
-            }
+            errorDiv.style.display = 'none';
+            headerOut.textContent = '';
+            payloadOut.textContent = '';
+
+            if (!token) return;
 
             const parts = token.split('.');
             if (parts.length !== 3) {
-                errorMessage.textContent = 'Invalid JWT format. A JWT must have 3 parts separated by dots.';
-                jwtHeader.textContent = '{}';
-                jwtPayload.textContent = '{}';
+                errorDiv.textContent = 'Invalid JWT: A token must consist of three parts separated by dots.';
+                errorDiv.style.display = 'block';
                 return;
             }
 
             try {
-                const headerJson = base64UrlDecode(parts[0]);
-                const payloadJson = base64UrlDecode(parts[1]);
+                const header = JSON.parse(base64UrlDecode(parts[0]));
+                headerOut.textContent = JSON.stringify(header, null, 2);
                 
-                jwtHeader.textContent = JSON.stringify(JSON.parse(headerJson), null, 2);
-                jwtPayload.textContent = JSON.stringify(JSON.parse(payloadJson), null, 2);
+                const payload = JSON.parse(base64UrlDecode(parts[1]));
+                payloadOut.textContent = JSON.stringify(payload, null, 2);
             } catch (e) {
-                errorMessage.textContent = 'Error decoding JWT: ' + e.message;
-                jwtHeader.textContent = '{}';
-                jwtPayload.textContent = '{}';
+                errorDiv.textContent = 'Error decoding JWT: ' + e.message;
+                errorDiv.style.display = 'block';
             }
         }
-
-        jwtInput.addEventListener('input', decodeJWT);
     </script>
 </body>
 </html>
