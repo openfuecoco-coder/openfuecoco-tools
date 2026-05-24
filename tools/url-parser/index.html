@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Query Parameter Parser - Extract & Decode URL Parameters</title>
+    <meta name="description" content="Easily parse and decode query parameters from any URL. Convert complex query strings into a readable list of keys and values.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "URL Query Parameter Parser",
+      "url": "https://openfuecoco.github.io/openfuecoco-tools/tools/url-parser/",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "Any",
+      "description": "Extracts and decodes query parameters from a provided URL into a readable list."
+    }
+    </script>
+    <style>
+        .tool-container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .input-group input { width: 100%; padding: 0.75rem; font-family: monospace; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .result-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .result-table th, .result-table td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; word-break: break-all; }
+        .result-table th { background-color: #f4f4f4; }
+        .error { color: #d9534f; margin-top: 0.5rem; display: none; }
+        .info-section { margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem; }
+        .info-section h2 { margin-bottom: 1rem; }
+        .info-section h3 { margin-top: 1.5rem; }
+        .example-box { background: #f9f9f9; padding: 1rem; border-left: 4px solid #ccc; font-family: monospace; margin: 1rem 0; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>URL Query Parameter Parser</h1>
+        <p>Enter a URL to extract its query parameters into a clean, readable format.</p>
+
+        <div class="input-group">
+            <label for="urlInput">URL</label>
+            <input type="text" id="urlInput" placeholder="https://example.com/page?name=John&age=30&city=Taipei&query=hello%20world" oninput="parseUrl()">
+            <div id="errorMessage" class="error">Invalid URL provided.</div>
+        </div>
+
+        <div id="resultArea">
+            <table class="result-table" id="paramTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="paramBody"></tbody>
+            </table>
+            <p id="noParamsMsg" style="display: none;">No query parameters found in the URL.</p>
+        </div>
+
+        <div class="info-section">
+            <h2>How to Use</h2>
+            <p>1. Paste the full URL (including the <code>?</code> and parameters) into the input field.</p>
+            <p>2. The tool will automatically parse the query string and display the keys and values in the table.</p>
+            <p>3. Parameters are automatically URL-decoded (e.g., <code>%20</code> becomes a space).</p>
+
+            <h3>Example Input</h3>
+            <div class="example-box">https://shop.example.com/search?category=electronics&sort=price_asc&q=smartphone&lang=en-US</div>
+            <p><strong>Expected Result:</strong></p>
+            <ul>
+                <li>category: electronics</li>
+                <li>sort: price_asc</li>
+                <li>q: smartphone</li>
+                <li>lang: en-US</li>
+            </ul>
+
+            <h3>Common Mistakes</h3>
+            <ul>
+                <li><strong>Omitting the <code>?</code>:</strong> Ensure the URL contains a query string starting with a question mark.</li>
+                <li><strong>Fragment Identifiers:</strong> Note that parameters after a <code>#</code> (fragment) are not considered part of the query string by standard URL parsing.</li>
+                <li><strong>Encoding Issues:</strong> If you see <code>%</code> signs in the results, it means the input was double-encoded.</li>
+            </ul>
+
+            <h3>Related Tools</h3>
+            <ul>
+                <li><a href="../json-to-yaml/">JSON to YAML Converter</a></li>
+                <li><a href="../yaml-to-json/">YAML to JSON Converter</a></li>
+                <li><a href="../jwt-decoder/">JWT Decoder</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function parseUrl() {
+            const urlInput = document.getElementById('urlInput').value.trim();
+            const paramTable = document.getElementById('paramTable');
+            const paramBody = document.getElementById('paramBody');
+            const noParamsMsg = document.getElementById('noParamsMsg');
+            const errorMessage = document.getElementById('errorMessage');
+
+            paramBody.innerHTML = '';
+            paramTable.style.display = 'none';
+            noParamsMsg.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            if (!urlInput) return;
+
+            try {
+                // Handle case where user enters only the query string starting with '?'
+                let urlToParse = urlInput;
+                if (urlInput.startsWith('?') || (!urlInput.includes('://') && !urlInput.includes('/'))) {
+                    urlToParse = 'http://temp.com/' + (urlInput.startsWith('?') ? urlInput : '?' + urlInput);
+                }
+
+                const url = new URL(urlToParse);
+                const params = new URLSearchParams(url.search);
+                
+                const entries = Array.from(params.entries());
+
+                if (entries.length > 0) {
+                    entries.forEach(([key, value]) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td>${escapeHtml(key)}</td><td>${escapeHtml(value)}</td>`;
+                        paramBody.appendChild(row);
+                    });
+                    paramTable.style.display = 'table';
+                } else {
+                    noParamsMsg.style.display = 'block';
+                }
+            } catch (e) {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
