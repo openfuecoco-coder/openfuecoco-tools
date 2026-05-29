@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Gradient Generator - Create Linear & Radial Gradients | Open Fuecoco Tools</title>
+    <meta name="description" content="Free online CSS Gradient Generator. Easily create beautiful linear and radial gradients with a visual editor and copy the CSS code instantly.">
+    <link rel="stylesheet" href="../../shared/style.css">
+    <style>
+        .gradient-tool-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #gradient-preview {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            border: 1px solid #C4B5A5;
+            margin-bottom: 20px;
+            background: white;
+        }
+        .control-group {
+            background: #FDFBF7;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #E8E4D9;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .control-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .color-stop {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #E8E4D9;
+        }
+        .color-stop input[type="color"] {
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            background: none;
+        }
+        .color-stop input[type="range"] {
+            flex-grow: 1;
+        }
+        .btn {
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #C4B5A5;
+            background: #fff;
+            color: #4A4036;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #C4B5A5;
+            color: #fff;
+        }
+        .btn-danger {
+            color: #d9534f;
+            border-color: #d9534f;
+        }
+        .btn-danger:hover {
+            background: #d9534f;
+            color: #fff;
+        }
+        .code-output {
+            width: 100%;
+            height: 80px;
+            font-family: monospace;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #C4B5A5;
+            border-radius: 4px;
+            background: #f9f9f9;
+            resize: none;
+        }
+        label {
+            font-weight: bold;
+            color: #4A4036;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CSS Gradient Generator",
+      "url": "https://openfuecoco-coder.github.io/openfuecoco-tools/tools/css-gradient-generator/",
+      "description": "A visual tool to create and generate CSS linear and radial gradients.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "Any"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>CSS Gradient Generator</h1>
+        <p>Create professional CSS gradients visually and copy the code for your projects.</p>
+
+        <div class="gradient-tool-container">
+            <div id="gradient-preview"></div>
+
+            <div class="control-group">
+                <div class="control-row">
+                    <label for="gradient-type">Type:</label>
+                    <select id="gradient-type" class="btn">
+                        <option value="linear">Linear</option>
+                        <option value="radial">Radial</option>
+                    </select>
+
+                    <div id="angle-control">
+                        <label for="gradient-angle">Angle (°):</label>
+                        <input type="number" id="gradient-angle" value="180" min="0" max="360" style="width: 60px;" class="btn">
+                    </div>
+                </div>
+
+                <div id="color-stops-container">
+                    <!-- Color stops will be added here -->
+                </div>
+
+                <button id="add-stop" class="btn">+ Add Color Stop</button>
+            </div>
+
+            <div class="control-group">
+                <label>Generated CSS:</label>
+                <textarea id="code-output" class="code-output" readonly></textarea>
+                <button id="copy-code" class="btn">Copy CSS Code</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <section class="info-section">
+            <h2>How to Use</h2>
+            <ol>
+                <li><strong>Select Type:</strong> Choose between <em>Linear</em> (straight line) or <em>Radial</em> (circular) gradients.</li>
+                <li><strong>Set Angle:</strong> For linear gradients, specify the direction in degrees (e.g., 90deg for left-to-right).</li>
+                <li><strong>Adjust Colors:</strong> Use the color picker to change colors and the slider to set the position of each color stop.</li>
+                <li><strong>Add/Remove:</strong> Add as many colors as you need or remove unnecessary ones.</li>
+                <li><strong>Copy Code:</strong> Once satisfied, copy the generated <code>background</code> property for your CSS file.</li>
+            </ol>
+
+            <h2>Example Input</h2>
+            <p><strong>Linear Sunset:</strong> Type: Linear, Angle: 180, Stops: <code>#ff5f6d (0%)</code>, <code>#ffc371 (100%)</code></p>
+            <p><strong>Radial Glow:</strong> Type: Radial, Stops: <code>#ffffff (0%)</code>, <code>#4facfe (100%)</code></p>
+
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Too many color stops:</strong> Using too many colors can make a gradient look muddy or unnatural.</li>
+                <li><strong>High contrast jumps:</strong> Placing two very different colors too close together creates a harsh line instead of a smooth blend.</li>
+                <li><strong>Ignoring Accessibility:</strong> Ensure text placed over gradients remains readable (check color contrast).</li>
+            </ul>
+
+            <h2>Related Tools</h2>
+            <ul>
+                <li><a href="../color-converter/">Color Converter</a></li>
+                <li><a href="../base64-converter/">Base64 Converter</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        const preview = document.getElementById('gradient-preview');
+        const typeSelect = document.getElementById('gradient-type');
+        const angleInput = document.getElementById('gradient-angle');
+        const angleControl = document.getElementById('angle-control');
+        const stopsContainer = document.getElementById('color-stops-container');
+        const addStopBtn = document.getElementById('add-stop');
+        const codeOutput = document.getElementById('code-output');
+        const copyBtn = document.getElementById('copy-code');
+
+        let stops = [
+            { color: '#4facfe', pos: 0 },
+            { color: '#00f2fe', pos: 100 }
+        ];
+
+        function createStopUI(stop, index) {
+            const div = document.createElement('div');
+            div.className = 'color-stop';
+            div.innerHTML = `
+                <input type="color" value="${stop.color}" data-index="${index}" class="stop-color">
+                <input type="range" min="0" max="100" value="${stop.pos}" data-index="${index}" class="stop-pos">
+                <span>${stop.pos}%</span>
+                <button class="btn btn-danger remove-stop" data-index="${index}">×</button>
+            `;
+            return div;
+        }
+
+        function updateGradient() {
+            const type = typeSelect.value;
+            const angle = angleInput.value;
+            
+            // Sort stops by position
+            const sortedStops = [...stops].sort((a, b) => a.pos - b.pos);
+            const stopString = sortedStops.map(s => `${s.color} ${s.pos}%`).join(', ');
+            
+            let css = '';
+            if (type === 'linear') {
+                css = `linear-gradient(${angle}deg, ${stopString})`;
+                angleControl.style.display = 'block';
+            } else {
+                css = `radial-gradient(circle, ${stopString})`;
+                angleControl.style.display = 'none';
+            }
+
+            const fullCSS = `background: ${css};`;
+            preview.style.background = css;
+            codeOutput.value = fullCSS;
+        }
+
+        function renderStops() {
+            stopsContainer.innerHTML = '';
+            stops.forEach((stop, i) => {
+                stopsContainer.appendChild(createStopUI(stop, i));
+            });
+            updateGradient();
+        }
+
+        stopsContainer.addEventListener('input', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            if (e.target.classList.contains('stop-color')) {
+                stops[index].color = e.target.value;
+            } else if (e.target.classList.contains('stop-pos')) {
+                stops[index].pos = parseInt(e.target.value);
+                e.target.nextElementSibling.textContent = stops[index].pos + '%';
+            }
+            updateGradient();
+        });
+
+        stopsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-stop')) {
+                if (stops.length <= 2) {
+                    alert('At least two color stops are required.');
+                    return;
+                }
+                const index = parseInt(e.target.dataset.index);
+                stops.splice(index, 1);
+                renderStops();
+            }
+        });
+
+        addStopBtn.addEventListener('click', () => {
+            const lastStop = stops[stops.length - 1];
+            const newPos = Math.min(100, lastStop.pos + 10);
+            stops.push({ color: '#ffffff', pos: newPos });
+            renderStops();
+        });
+
+        typeSelect.addEventListener('change', updateGradient);
+        angleInput.addEventListener('input', updateGradient);
+
+        copyBtn.addEventListener('click', () => {
+            codeOutput.select();
+            document.execCommand('copy');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => copyBtn.textContent = originalText, 2000);
+        });
+
+        renderStops();
+    </script>
+    <script src="../../shared/ads.js"></script>
+</body>
+</html>
